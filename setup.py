@@ -37,4 +37,6 @@ setup(
     packages=find_packages(),
 
     # Dependencies
-    install_requires=[])
+    install_requires=[
+        'Django >= 1.8, < 1.12'
+    ])
