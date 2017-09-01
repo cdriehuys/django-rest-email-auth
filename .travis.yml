@@ -1,0 +1,17 @@
+language: python
+python:
+  - 2.7
+  - 3.4
+  - 3.5
+  - 3.6
+
+cache: pip
+
+install:
+  - pip install --upgrade pip
+  - python setup.py install
+  - pip install -r requirements/test.txt
+
+script:
+  - flake8
+  - pytest
