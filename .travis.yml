@@ -7,8 +7,16 @@ python:
 
 cache: pip
 
+env:
+  matrix:
+    - DJANGO='>= 1.8, < 1.9'
+    - DJANGO='>= 1.9, < 1.10'
+    - DJANGO='>= 1.10, < 1.11'
+    - DJANGO='>= 1.11, < 1.12'
+
 install:
   - pip install --upgrade pip
+  - pip install "Django $DJANGO"
   - python setup.py install
   - pip install -r requirements/test.txt
 
