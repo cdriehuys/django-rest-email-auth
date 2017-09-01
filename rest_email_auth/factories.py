@@ -7,6 +7,19 @@ from django.contrib.auth import get_user_model
 
 import factory
 
+from rest_email_auth import models
+
+
+class EmailFactory(factory.django.DjangoModelFactory):
+    """
+    Factory for generating email addresses.
+    """
+    email = factory.sequence(lambda n: 'test{n}@example.com'.format(n=n))
+    user = factory.SubFactory('rest_email_auth.factories.UserFactory')
+
+    class Meta(object):
+        model = models.EmailAddress
+
 
 class UserFactory(factory.django.DjangoModelFactory):
     """

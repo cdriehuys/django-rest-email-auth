@@ -7,6 +7,17 @@ from rest_email_auth import factories
 
 
 @pytest.fixture
+def email_factory(db):
+    """
+    Fixture to get the factory used to create email addresses.
+
+    Returns:
+        The factory used to create ``EmailAddress`` instances.
+    """
+    return factories.EmailFactory
+
+
+@pytest.fixture
 def user_factory(db):
     """
     Fixture to get the factory used to create users.

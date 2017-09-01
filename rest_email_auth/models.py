@@ -30,3 +30,14 @@ class EmailAddress(models.Model):
     class Meta(object):
         verbose_name = _('email address')
         verbose_name_plural = _('email addresses')
+
+    def __str__(self):
+        """
+        Get a string representation of the email address.
+
+        Returns:
+            str:
+                A text version of the email address. Ex:
+                ``test@example.com``.
+        """
+        return self.email
