@@ -1,5 +1,9 @@
 import datetime
-from unittest import mock
+
+try:
+    from unittest import mock
+except ImportError:
+    import mock
 
 from rest_email_auth import models
 
