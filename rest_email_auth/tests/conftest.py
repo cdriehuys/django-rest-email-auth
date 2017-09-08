@@ -20,6 +20,17 @@ def api_rf():
 
 
 @pytest.fixture
+def email_confirmation_factory(db):
+    """
+    Fixture to get the factory used to create email confirmations.
+
+    Returns:
+        The factory used to create ``EmailConfirmation`` instances.
+    """
+    return factories.EmailConfirmationFactory
+
+
+@pytest.fixture
 def email_factory(db):
     """
     Fixture to get the factory used to create email addresses.
