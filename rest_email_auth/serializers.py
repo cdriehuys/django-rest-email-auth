@@ -25,7 +25,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
             'password': {
                 'style': {'input_type': 'password'},
                 'write_only': True,
-            }
+            },
         }
         fields = (UserModel.USERNAME_FIELD, 'email', 'password')
         model = UserModel
@@ -43,8 +43,11 @@ class RegistrationSerializer(serializers.ModelSerializer):
             A new user created from the provided data.
         """
         email = validated_data.pop('email')
-
         user = UserModel.objects.create_user(**validated_data)
+
+        # We set an ephemeral email property so that it is included in
+        # the data returned by the serializer.
+        user.email = email
 
         models.EmailAddress.objects.create(email=email, user=user)
 
