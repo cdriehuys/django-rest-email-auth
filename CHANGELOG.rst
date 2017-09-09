@@ -1,6 +1,13 @@
 Changelog
 =========
 
+v0.2
+----
+
+Features
+  * #5: Add an endpoint for verifying email addresses.
+
+
 v0.1
 ----
 
