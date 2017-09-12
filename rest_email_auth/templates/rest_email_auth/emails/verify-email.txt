@@ -1,0 +1,5 @@
+{% load i18n %}{% blocktrans %}Hello,
+
+Please verify your email address with the following key:{% endblocktrans %}
+
+{{ confirmation.key }}
