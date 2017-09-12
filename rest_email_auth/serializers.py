@@ -119,6 +119,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
         # the data returned by the serializer.
         user.email = email
 
-        models.EmailAddress.objects.create(email=email, user=user)
+        email_instance = models.EmailAddress.objects.create(
+            email=email,
+            user=user)
+        email_instance.send_confirmation()
 
         return user
