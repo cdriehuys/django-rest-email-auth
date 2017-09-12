@@ -19,10 +19,13 @@ install:
   - pip install "Django $DJANGO"
   - python setup.py install
   - pip install -r requirements/test.txt
+  - pip install -r requirements/ci.txt
 
 script:
   - flake8
-  - pytest
+  - coverage run -m pytest
+
+after_script: codecov
 
 # Add job to deploy to PyPI after tests complete
 jobs:
@@ -34,6 +37,7 @@ jobs:
     # Skip usual steps
     install: skip
     script: skip
+    after_script: skip
 
     deploy:
       provider: pypi
