@@ -3,6 +3,9 @@ try:
 except ImportError:
     import mock
 
+from django.conf import settings
+from django.template.loader import render_to_string
+
 from rest_email_auth import models
 
 
@@ -31,6 +34,30 @@ def test_send_confirmation(email_factory):
 
     assert email.confirmations.count() == 1
     assert mock_send.call_count == 1
+
+
+def test_send_duplicate_signup(email_factory, mailoutbox):
+    """
+    Sending a duplicate signup notification should send the user an
+    email stating that their email was used to register even though
+    they already have an account.
+    """
+    email = email_factory()
+    email.send_duplicate_signup()
+
+    context = {}
+    message = render_to_string(
+        context=context,
+        template_name='rest_email_auth/emails/duplicate-signup.txt')
+
+    assert len(mailoutbox) == 1
+
+    msg = mailoutbox[0]
+
+    assert msg.body == message
+    assert msg.from_email == settings.DEFAULT_FROM_EMAIL
+    assert msg.subject == 'Registration Attempt'
+    assert msg.to == [email.email]
 
 
 def test_string_conversion(email_factory):
