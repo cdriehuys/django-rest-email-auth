@@ -1,38 +1,17 @@
 """Views for the ``rest_email_auth`` app.
 """
 
-from rest_framework import generics, status
+from rest_framework import generics
 
 from rest_email_auth import serializers
+from rest_email_auth.generics import SerializerSaveView
 
 
-class EmailVerificationView(generics.CreateAPIView):
+class EmailVerificationView(SerializerSaveView):
     """
     Verify a user's email address.
     """
     serializer_class = serializers.EmailVerificationSerializer
-
-    def create(self, request, *args, **kwargs):
-        """
-        Override the create method to return a 200 response.
-
-        Args:
-            request:
-                The request being made.
-            args:
-                The arguments to pass to the parent create method.
-            kwargs:
-                The keyword arguments to pass to the parent create
-                method.
-
-        Returns:
-            A response with a 200 status code.
-        """
-        response = super(EmailVerificationView, self).create(
-            request, *args, **kwargs)
-        response.status_code = status.HTTP_200_OK
-
-        return response
 
 
 class RegistrationView(generics.CreateAPIView):
