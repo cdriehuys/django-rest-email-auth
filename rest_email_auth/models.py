@@ -2,7 +2,9 @@ import datetime
 import logging
 
 from django.conf import settings
+from django.core import mail
 from django.db import models
+from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
@@ -61,6 +63,28 @@ class EmailAddress(models.Model):
         """
         return self.email
 
+    def send_confirmation(self):
+        """
+        Send a verification email for the email address.
+        """
+        confirmation = EmailConfirmation.objects.create(email=self)
+        confirmation.send()
+
+    def send_duplicate_signup(self):
+        """
+        Send a notification about a duplicate signup.
+        """
+        context = {}
+        message = render_to_string(
+            context=context,
+            template_name='rest_email_auth/emails/duplicate-signup.txt')
+
+        mail.send_mail(
+            from_email=None,
+            message=message,
+            recipient_list=[self.email],
+            subject=_('Registration Attempt'))
+
 
 class EmailConfirmation(models.Model):
     """
@@ -107,3 +131,20 @@ class EmailConfirmation(models.Model):
         expiration_time = self.created_at + datetime.timedelta(days=1)
 
         return timezone.now() > expiration_time
+
+    def send(self):
+        """
+        Send a verification email to the user.
+        """
+        context = {
+            'confirmation': self,
+        }
+        message = render_to_string(
+            context=context,
+            template_name='rest_email_auth/emails/verify-email.txt')
+
+        mail.send_mail(
+            from_email=None,
+            message=message,
+            recipient_list=[self.email.email],
+            subject=_('Please Verify Your Email Address'))

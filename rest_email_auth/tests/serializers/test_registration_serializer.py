@@ -1,3 +1,10 @@
+try:
+    from unittest import mock
+except ImportError:
+    import mock
+
+from django.contrib.auth import get_user_model
+
 import pytest
 
 from rest_email_auth import serializers
@@ -17,7 +24,10 @@ def test_create_new_user():
     serializer = serializers.RegistrationSerializer(data=data)
     assert serializer.is_valid()
 
-    user = serializer.save()
+    with mock.patch(
+            'rest_email_auth.serializers.models.EmailAddress.send_confirmation',    # noqa
+            autospec=True) as mock_send_confirmation:
+        user = serializer.save()
 
     assert user.username == data['username']
     assert user.check_password(data['password'])
@@ -26,3 +36,32 @@ def test_create_new_user():
     email = user.email_addresses.get()
 
     assert email.email == data['email']
+
+    # Make sure we sent out an email confirmation
+    assert mock_send_confirmation.call_count == 1
+
+
+def test_register_duplicate_email(email_factory):
+    """
+    Attempting to register with an email that has already been verified
+    should send an email to the owner of the email address notifying
+    them of the registration attempt.
+    """
+    email = email_factory(is_verified=True)
+
+    data = {
+        'email': email.email,
+        'password': 'password',
+        'username': 'user',
+    }
+
+    serializer = serializers.RegistrationSerializer(data=data)
+    assert serializer.is_valid()
+
+    with mock.patch(
+            'rest_email_auth.serializers.models.EmailAddress.send_duplicate_signup', # noqa
+            autospec=True) as mock_send_duplicate_signup:
+        serializer.save()
+
+    assert get_user_model().objects.count() == 1
+    assert mock_send_duplicate_signup.call_count == 1
