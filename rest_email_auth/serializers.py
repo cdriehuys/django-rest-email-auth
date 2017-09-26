@@ -4,7 +4,7 @@ The serializers handle the conversion of data between the JSON or form
 data the API receives and native Python datatypes.
 """
 
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, password_validation
 from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import serializers
@@ -144,3 +144,24 @@ class RegistrationSerializer(serializers.ModelSerializer):
             email_instance.send_confirmation()
 
         return user
+
+    def validate_password(self, password):
+        """
+        Validate the provided password.
+
+        Args:
+            password (str):
+                The password provided by the user.
+
+        Returns:
+            str:
+                The validated password.
+
+        Raises:
+            ValidationError:
+                If the provided password doesn't pass Django's provided
+                password validation.
+        """
+        password_validation.validate_password(password)
+
+        return password

@@ -65,3 +65,26 @@ def test_register_duplicate_email(email_factory):
 
     assert get_user_model().objects.count() == 1
     assert mock_send_duplicate_signup.call_count == 1
+
+
+@pytest.mark.django_db
+def test_validate_password():
+    """
+    Validating the serializer's data should run the provided password
+    through Django's default password validation system.
+    """
+    data = {
+        'email': 'test@example.com',
+        'password': 'password',
+        'username': 'user',
+    }
+
+    serializer = serializers.RegistrationSerializer(data=data)
+
+    with mock.patch(
+            'rest_email_auth.serializers.password_validation.validate_password',    # noqa
+            autospec=True) as mock_validate:
+        assert serializer.is_valid()
+
+    assert mock_validate.call_count == 1
+    assert set(mock_validate.call_args[0]) == {data['password']}
