@@ -1,5 +1,5 @@
 {% load i18n %}{% blocktrans %}Hello,
 
-Please verify your email address with the following key:{% endblocktrans %}
+Please click the link below to verify your email address.{% endblocktrans %}
 
-{{ confirmation.key }}
+{{ verification_url }}

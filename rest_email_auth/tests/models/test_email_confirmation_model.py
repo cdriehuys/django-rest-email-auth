@@ -5,7 +5,6 @@ try:
 except ImportError:
     import mock
 
-from django.conf import settings
 from django.template.loader import render_to_string
 
 from rest_email_auth import models
@@ -58,16 +57,23 @@ def test_is_expired_unexpired(email_confirmation_factory):
     assert not confirmation.is_expired
 
 
-def test_send(email_confirmation_factory, mailoutbox):
+def test_send(email_confirmation_factory, mailoutbox, settings):
     """
     Sending the confirmation should send an email to the associated
     email address.
     """
+    settings.REST_EMAIL_AUTH = {
+        'EMAIL_VERIFICATION_URL': 'https://example.com/verify?key={key}',
+    }
+
     confirmation = email_confirmation_factory()
     confirmation.send()
 
+    url = settings.REST_EMAIL_AUTH['EMAIL_VERIFICATION_URL'].format(
+        key=confirmation.key)
+
     context = {
-        'confirmation': confirmation,
+        'verification_url': url,
     }
     expected_content = render_to_string(
         context=context,

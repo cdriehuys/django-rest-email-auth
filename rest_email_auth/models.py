@@ -9,6 +9,8 @@ from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 
+from rest_email_auth import app_settings
+
 
 logger = logging.getLogger(__name__)
 
@@ -140,7 +142,8 @@ class EmailConfirmation(models.Model):
         Send a verification email to the user.
         """
         context = {
-            'confirmation': self,
+            'verification_url': app_settings.EMAIL_VERIFICATION_URL.format(
+                key=self.key),
         }
         message = render_to_string(
             context=context,
