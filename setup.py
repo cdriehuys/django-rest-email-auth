@@ -23,8 +23,6 @@ setup(
 
         # Supported versions of Django
         'Framework :: Django',
-        'Framework :: Django :: 1.8',
-        'Framework :: Django :: 1.9',
         'Framework :: Django :: 1.10',
         'Framework :: Django :: 1.11',
 
@@ -48,5 +46,5 @@ setup(
     # Dependencies
     install_requires=[
         'Django >= 1.8, < 1.12',
-        'djangorestframework >= 3.0, < 4.0',
+        'djangorestframework >= 3.0, < 3.7',
     ])
