@@ -29,13 +29,15 @@ after_success: codecov
 jobs:
   include:
   - stage: PyPI release
+    if: tag IS present
+
     python: 3.6
     env: DJANGO='>= 1.11, < 1.12'
 
     # Skip usual steps
     install: skip
     script: skip
-    after_script: skip
+    after_success: skip
 
     deploy:
       provider: pypi
