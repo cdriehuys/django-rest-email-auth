@@ -23,3 +23,6 @@ TEMPLATES = [
         },
     },
 ]
+
+
+ROOT_URLCONF = 'test_urls'

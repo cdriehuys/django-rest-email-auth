@@ -3,9 +3,20 @@
 
 import pytest
 
-from rest_framework.test import APIRequestFactory
+from rest_framework.test import APIClient, APIRequestFactory
 
 from rest_email_auth import factories
+
+
+@pytest.fixture
+def api_client():
+    """
+    Fixture to get a client for making API requests.
+
+    Returns:
+        An instance of the APIClient provided by DRF.
+    """
+    return APIClient()
 
 
 @pytest.fixture

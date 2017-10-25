@@ -19,3 +19,10 @@ class RegistrationView(generics.CreateAPIView):
     Register a new user.
     """
     serializer_class = serializers.RegistrationSerializer
+
+
+class ResendVerificationView(SerializerSaveView):
+    """
+    Resend an email verification to a specific address.
+    """
+    serializer_class = serializers.ResendVerificationSerializer
