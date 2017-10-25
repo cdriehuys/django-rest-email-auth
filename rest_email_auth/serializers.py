@@ -128,9 +128,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         # the data returned by the serializer.
         user.email = email
 
-        email_query = models.EmailAddress.objects.filter(
-            email=email,
-            is_verified=True)
+        email_query = models.EmailAddress.objects.filter(email=email)
 
         if email_query.exists():
             existing_email = email_query.get()

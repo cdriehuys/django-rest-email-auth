@@ -47,7 +47,7 @@ def test_register_duplicate_email(email_factory):
     should send an email to the owner of the email address notifying
     them of the registration attempt.
     """
-    email = email_factory(is_verified=True)
+    email = email_factory()
 
     data = {
         'email': email.email,

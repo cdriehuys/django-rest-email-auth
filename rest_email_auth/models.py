@@ -34,6 +34,7 @@ class EmailAddress(models.Model):
 
     email = models.EmailField(
         max_length=255,
+        unique=True,
         verbose_name=_('email'))
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -84,6 +85,8 @@ class EmailAddress(models.Model):
             message=message,
             recipient_list=[self.email],
             subject=_('Registration Attempt'))
+
+        logger.info('Sent duplicate signup notification to: %s', self.email)
 
 
 class EmailConfirmation(models.Model):
