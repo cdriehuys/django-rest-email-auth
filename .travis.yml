@@ -23,7 +23,7 @@ script:
   - flake8
   - coverage run -m pytest
 
-after_script: codecov
+after_success: codecov
 
 # Add job to deploy to PyPI after tests complete
 jobs:
