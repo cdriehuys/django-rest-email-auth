@@ -40,9 +40,35 @@ class AppSettings(object):
         return settings_dict.get(name, default)
 
     @property
+    def CONFIRMATION_EXPIRATION(self):
+        """
+        The duration that an email confirmation is valid for.
+
+        Defaults to 1 day.
+        """
+        import datetime
+
+        return self._setting(
+            'CONFIRMATION_EXPIRATION',
+            datetime.timedelta(days=1))
+
+    @property
+    def CONFIRMATION_SAVE_PERIOD(self):
+        """
+        The duration that expired confirmations are saved for.
+
+        Defaults to 7 days.
+        """
+        import datetime
+
+        return self._setting(
+            'CONFIRMATION_SAVE_PERIOD',
+            datetime.timedelta(days=7))
+
+    @property
     def EMAIL_VERIFICATION_URL(self):
         """
-        Get the template to use for the email verification url.
+        The template to use for the email verification url.
         """
         return self._setting('EMAIL_VERIFICATION_URL', '')
 
