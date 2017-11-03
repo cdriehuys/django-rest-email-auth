@@ -14,7 +14,26 @@ django-rest-email-auth
 .. image:: https://img.shields.io/pypi/v/django-rest-email-auth.svg
     :target: https://pypi.python.org/pypi/django-rest-email-auth/
 
-Django app to handle authentication and registration by email.
+
+Important Links
+===============
+
+Project Homepage
+  https://github.com/cdriehuys/django-rest-email-auth
+
+Documentation
+  https://django-rest-email-auth.readthedocs.io
+
+
+Overview
+========
+
+This package provides a simple way to enable authentication with email addresses for a REST API.
+
+Features:
+  * Verify user email addresses
+  * Authenticate using any of a user's email addresses
+  * Registration of new users
 
 
 License
