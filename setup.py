@@ -45,6 +45,6 @@ setup(
 
     # Dependencies
     install_requires=[
-        'Django >= 1.8, < 1.12',
+        'Django >= 1.10, < 1.12',
         'djangorestframework >= 3.0, < 3.7',
     ])
