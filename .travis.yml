@@ -9,8 +9,6 @@ cache: pip
 
 env:
   matrix:
-    - DJANGO='>= 1.8, < 1.9'
-    - DJANGO='>= 1.9, < 1.10'
     - DJANGO='>= 1.10, < 1.11'
     - DJANGO='>= 1.11, < 1.12'
 
@@ -19,21 +17,27 @@ install:
   - pip install "Django $DJANGO"
   - python setup.py install
   - pip install -r requirements/test.txt
+  - pip install -r requirements/ci.txt
 
 script:
   - flake8
-  - pytest
+  - coverage run -m pytest
+
+after_success: codecov
 
 # Add job to deploy to PyPI after tests complete
 jobs:
   include:
   - stage: PyPI release
+    if: tag IS present
+
     python: 3.6
     env: DJANGO='>= 1.11, < 1.12'
 
     # Skip usual steps
     install: skip
     script: skip
+    after_success: skip
 
     deploy:
       provider: pypi

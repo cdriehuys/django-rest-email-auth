@@ -1,0 +1,5 @@
+{% load i18n %}{% blocktrans %}Hello,
+
+Please click the link below to verify your email address.{% endblocktrans %}
+
+{{ verification_url }}

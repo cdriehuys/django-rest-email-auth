@@ -16,3 +16,14 @@ class EmailAddressAdmin(admin.ModelAdmin):
     list_filter = ('is_verified',)
     readonly_fields = ('created_at',)
     search_fields = ('email',)
+
+
+@admin.register(models.EmailConfirmation)
+class EmailConfirmationAdmin(admin.ModelAdmin):
+    """
+    Admin for ``EmailConfirmation`` instances.
+    """
+    fields = ('email', 'key', 'created_at')
+    list_display = ('email', 'created_at')
+    readonly_fields = ('email', 'key', 'created_at')
+    search_fields = ('email__email',)
