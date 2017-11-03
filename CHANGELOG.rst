@@ -1,6 +1,14 @@
 Changelog
 =========
 
+
+v0.2.1
+------
+
+Bugfixes
+  * #20: Fix for tagged releases not being deployed.
+
+
 v0.2
 ----
 
