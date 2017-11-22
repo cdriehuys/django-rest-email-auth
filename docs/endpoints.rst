@@ -57,3 +57,56 @@ email address.
 
     :status 200: The returned email was successfully verified.
     :status 400: An invalid request was made. Check the response data for details.
+
+
+Viewing Existing Email Addresses
+================================
+
+All the email addresses associated with a user can be listed using the following endpoint. This endpoint can also be used to add a new email address to the user's account.
+
+.. http:get:: /emails/
+
+    List the email addresses associated with the requesting user.
+
+    :>jsonarr int id: The ID that uniquely identifies the email address.
+    :>jsonarr string created_at: A timestamp identifying when the email address was added by the user.
+    :>jsonarr string email: The email's actual address.
+    :>jsonarr boolean is_verified: A boolean indicating if the email address has been verified.
+
+.. http:post:: /emails/
+
+    Add a new email address for the requesting user.
+
+    :<json string email: The address of the email to add.
+
+    :>json int id: The ID that uniquely identifies the email address.
+    :>json string created_at: A timestamp identifying when the email address was added by the user.
+    :>json string email: The email's actual address.
+    :>json boolean is_verified: A boolean indicating if the email address has been verified.
+
+
+Viewing or Deleting a Specific Email Address
+============================================
+
+.. http:get:: /emails/(int:id)/
+
+    Retrieve information about a specific email address.
+
+    :param int id: The unique ID of the email address to retrieve.
+
+    :>json int id: The ID that uniquely identifies the email address.
+    :>json string created_at: A timestamp identifying when the email address was added by the user.
+    :>json string email: The email's actual address.
+    :>json boolean is_verified: A boolean indicating if the email address has been verified.
+
+    :status 200: The email address was successfully retrieved.
+    :status 404: There is no email address with the provided `id` accessible to the requesting user.
+
+.. http:delete:: /emails/(int:id)/
+
+    Delete the email address with the specified `id`.
+
+    :param int id: The unique ID of the email address to delete.
+
+    :status 204: The email address was successfully deleted.
+    :status 404: There is no email address with the provided `id` accessible to the requesting user.

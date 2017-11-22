@@ -1,3 +1,0 @@
-{% load i18n %}{% blocktrans %}Hello,
-
-Someone just registered using this email address. Just letting you know.{% endblocktrans %}

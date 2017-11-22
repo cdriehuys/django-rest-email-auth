@@ -59,7 +59,7 @@ def test_register_duplicate_email(email_factory):
     assert serializer.is_valid()
 
     with mock.patch(
-            'rest_email_auth.serializers.models.EmailAddress.send_duplicate_signup', # noqa
+            'rest_email_auth.serializers.models.EmailAddress.send_duplicate_notification',  # noqa
             autospec=True) as mock_send_duplicate_signup:
         serializer.save()
 

@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+v1.0.0
+------
+
+Features
+  * :issue:`22`: Add endpoints for managing email addresses.
+
+
 v0.2.1
 ------
 

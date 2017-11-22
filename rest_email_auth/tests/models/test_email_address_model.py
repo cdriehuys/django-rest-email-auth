@@ -36,19 +36,19 @@ def test_send_confirmation(email_factory):
     assert mock_send.call_count == 1
 
 
-def test_send_duplicate_signup(email_factory, mailoutbox):
+def test_send_duplicate_notification(email_factory, mailoutbox):
     """
     Sending a duplicate signup notification should send the user an
     email stating that their email was used to register even though
     they already have an account.
     """
     email = email_factory()
-    email.send_duplicate_signup()
+    email.send_duplicate_notification()
 
     context = {}
     message = render_to_string(
         context=context,
-        template_name='rest_email_auth/emails/duplicate-signup.txt')
+        template_name='rest_email_auth/emails/duplicate-email.txt')
 
     assert len(mailoutbox) == 1
 

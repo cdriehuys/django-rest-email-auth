@@ -73,14 +73,14 @@ class EmailAddress(models.Model):
         confirmation = EmailConfirmation.objects.create(email=self)
         confirmation.send()
 
-    def send_duplicate_signup(self):
+    def send_duplicate_notification(self):
         """
         Send a notification about a duplicate signup.
         """
         context = {}
         message = render_to_string(
             context=context,
-            template_name='rest_email_auth/emails/duplicate-signup.txt')
+            template_name='rest_email_auth/emails/duplicate-email.txt')
 
         mail.send_mail(
             from_email=None,
@@ -88,7 +88,7 @@ class EmailAddress(models.Model):
             recipient_list=[self.email],
             subject=_('Registration Attempt'))
 
-        logger.info('Sent duplicate signup notification to: %s', self.email)
+        logger.info('Sent duplicate email notification to: %s', self.email)
 
 
 class EmailConfirmation(models.Model):
