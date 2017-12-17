@@ -42,6 +42,12 @@ In :file:`settings.py`, make sure the following settings are present::
     ]
 
 
+    AUTHENTICATION_BACKENDS = [
+        'rest_email_auth.authentication.VerifiedEmailBackend',
+        'django.contrib.auth.backends.ModelBackend',
+    ]
+
+
     # The minimal settings dict required for the app
     REST_EMAIL_AUTH = {
         'EMAIL_VERIFICATION_URL': 'https://example.com/verify/{key}',
