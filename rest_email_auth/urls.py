@@ -12,6 +12,15 @@ app_name = 'rest-email-auth'
 
 urlpatterns = [
     url(
+        r'^emails/$',
+        views.EmailListView.as_view(),
+        name='email-list'),
+
+    url(r'^emails/(?P<pk>[0-9]+)/$',
+        views.EmailDetailView.as_view(),
+        name='email-detail'),
+
+    url(
         r'^register/$',
         views.RegistrationView.as_view(),
         name='register'),
