@@ -33,11 +33,11 @@ class EmailSerializer(serializers.ModelSerializer):
                 'validators': [],
             },
         }
-        fields = ('id', 'created_at', 'email', 'is_verified')
+        fields = ('id', 'created_at', 'email', 'is_primary', 'is_verified')
         model = models.EmailAddress
         read_only_fields = ('is_verified',)
 
-    def create(self, *args, **kwargs):
+    def create(self, validated_data):
         """
         Create a new email and send a confirmation to it.
 
@@ -52,10 +52,42 @@ class EmailSerializer(serializers.ModelSerializer):
 
             email.send_duplicate_notification()
         else:
-            email = super(EmailSerializer, self).create(*args, **kwargs)
+            email = super(EmailSerializer, self).create(validated_data)
             email.send_confirmation()
 
+            user = validated_data.get('user')
+            query = models.EmailAddress.objects.filter(
+                is_primary=True,
+                user=user)
+
+            if not query.exists():
+                email.set_primary()
+
         return email
+
+    def update(self, instance, validated_data):
+        """
+        Update the instance the serializer is bound to.
+
+        Args:
+            instance:
+                The instance the serializer is bound to.
+            validated_data:
+                The data to update the serializer with.
+
+        Returns:
+            The updated instance.
+        """
+        is_primary = validated_data.pop('is_primary', False)
+
+        instance = super(EmailSerializer, self).update(
+            instance,
+            validated_data)
+
+        if is_primary:
+            instance.set_primary()
+
+        return instance
 
     def validate_email(self, email):
         """
@@ -75,6 +107,27 @@ class EmailSerializer(serializers.ModelSerializer):
                   "instead."))
 
         return email
+
+    def validate_is_primary(self, is_primary):
+        """
+        Validate the provided 'is_primary' parameter.
+
+        Returns:
+            The validated 'is_primary' value.
+
+        Raises:
+            serializers.ValidationError:
+                If the user attempted to mark an unverified email as
+                their primary email address.
+        """
+        # TODO: Setting 'is_primary' to 'False' should probably not be
+        #       allowed.
+        if is_primary and not (self.instance and self.instance.is_verified):
+            raise serializers.ValidationError(
+                _("Unverified email addresses may not be used as the primary "
+                  "address."))
+
+        return is_primary
 
 
 class EmailVerificationSerializer(serializers.Serializer):

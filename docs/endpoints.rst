@@ -59,8 +59,8 @@ email address.
     :status 400: An invalid request was made. Check the response data for details.
 
 
-Viewing Existing Email Addresses
-================================
+Listing or Creating Email Addresses
+===================================
 
 All the email addresses associated with a user can be listed using the following endpoint. This endpoint can also be used to add a new email address to the user's account.
 
@@ -71,6 +71,7 @@ All the email addresses associated with a user can be listed using the following
     :>jsonarr int id: The ID that uniquely identifies the email address.
     :>jsonarr string created_at: A timestamp identifying when the email address was added by the user.
     :>jsonarr string email: The email's actual address.
+    :>jsonarr boolean is_primary: A boolean indicating if the address is the user's primary address.
     :>jsonarr boolean is_verified: A boolean indicating if the email address has been verified.
 
 .. http:post:: /emails/
@@ -82,10 +83,11 @@ All the email addresses associated with a user can be listed using the following
     :>json int id: The ID that uniquely identifies the email address.
     :>json string created_at: A timestamp identifying when the email address was added by the user.
     :>json string email: The email's actual address.
+    :>json boolean is_primary: A boolean indicating if the address is the user's primary address.
     :>json boolean is_verified: A boolean indicating if the email address has been verified.
 
 
-Viewing or Deleting a Specific Email Address
+Viewing, Modifying, or Deleting a Specific Email Address
 ============================================
 
 .. http:get:: /emails/(int:id)/
@@ -97,10 +99,49 @@ Viewing or Deleting a Specific Email Address
     :>json int id: The ID that uniquely identifies the email address.
     :>json string created_at: A timestamp identifying when the email address was added by the user.
     :>json string email: The email's actual address.
+    :>json boolean is_primary: A boolean indicating if the address is the user's primary address.
     :>json boolean is_verified: A boolean indicating if the email address has been verified.
 
     :status 200: The email address was successfully retrieved.
     :status 404: There is no email address with the provided `id` accessible to the requesting user.
+
+.. http:put:: /emails/(int:id)/
+
+    Update a specific email address.
+
+    :param int id: The unique ID of the email address to retrieve.
+
+    :<json string email: The original email address. This field may not be changed.
+    :<json boolean is_primary: A boolean indicating if this address should be the user's primary email. This may only be ``true`` for a verified email.
+
+    :>json int id: The ID that uniquely identifies the email address.
+    :>json string created_at: A timestamp identifying when the email address was added by the user.
+    :>json string email: The email's actual address.
+    :>json boolean is_primary: A boolean indicating if the address is the user's primary address.
+    :>json boolean is_verified: A boolean indicating if the email address has been verified.
+
+    :status 200: The email address was successfully updated.
+    :status 404: There is no email address with the provided `id` accessible to the requesting user.
+
+
+.. http:patch:: /emails/(int:id)/
+
+    Partially update a specific email address.
+
+    :param int id: The unique ID of the email address to retrieve.
+
+    :<json string email: *(Optional)* The original email address. This field may not be changed.
+    :<json boolean is_primary: *(Optional)* A boolean indicating if this address should be the user's primary email. This may only be ``true`` for a verified email.
+
+    :>json int id: The ID that uniquely identifies the email address.
+    :>json string created_at: A timestamp identifying when the email address was added by the user.
+    :>json string email: The email's actual address.
+    :>json boolean is_primary: A boolean indicating if the address is the user's primary address.
+    :>json boolean is_verified: A boolean indicating if the email address has been verified.
+
+    :status 200: The email address was successfully updated.
+    :status 404: There is no email address with the provided `id` accessible to the requesting user.
+
 
 .. http:delete:: /emails/(int:id)/
 

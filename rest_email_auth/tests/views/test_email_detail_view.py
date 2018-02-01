@@ -63,3 +63,26 @@ def test_get_other_user_email(api_client, email_factory, user_factory):
     response = api_client.get(url)
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
+
+
+def test_update(api_client, email_factory):
+    """
+    Sending a PATCH request to the view should allow for updating the
+    email address associated with the endpoint.
+    """
+    email = email_factory(is_primary=False, is_verified=True)
+    data = {
+        'is_primary': True,
+    }
+
+    api_client.force_authenticate(user=email.user)
+
+    url = reverse('rest-email-auth:email-detail', kwargs={'pk': email.pk})
+    response = api_client.patch(url, data)
+
+    assert response.status_code == status.HTTP_200_OK
+
+    email.refresh_from_db()
+    serializer = serializers.EmailSerializer(email)
+
+    assert response.data == serializer.data

@@ -15,6 +15,7 @@ def test_create(user_factory):
     """
     email = models.EmailAddress.objects.create(
         email='test@example.com',
+        is_primary=True,
         user=user_factory())
 
     assert not email.is_verified
@@ -58,6 +59,21 @@ def test_send_duplicate_notification(email_factory, mailoutbox):
     assert msg.from_email == settings.DEFAULT_FROM_EMAIL
     assert msg.subject == 'Registration Attempt'
     assert msg.to == [email.email]
+
+
+def test_set_primary(email_factory):
+    """
+    Setting an email as the primary should update all of the user's
+    other email addresses to not be the primary.
+    """
+    old = email_factory(is_primary=True)
+    new = email_factory(is_primary=False, user=old.user)
+
+    new.set_primary()
+    old.refresh_from_db()
+
+    assert new.is_primary
+    assert not old.is_primary
 
 
 def test_string_conversion(email_factory):

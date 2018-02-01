@@ -8,13 +8,25 @@ from rest_email_auth import serializers
 from rest_email_auth.generics import SerializerSaveView
 
 
-class EmailDetailView(generics.RetrieveDestroyAPIView):
+class EmailDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
     delete:
     Delete a specific email address.
 
     get:
     Retrieve the details of a particular email address.
+
+    patch:
+    Partially update an email address.
+
+    Only a verified email address may be marked as the user's primary
+    email.
+
+    put:
+    Update an email address.
+
+    Only a verified emaili address may be marked as the user's primary
+    email.
     """
     permission_classes = (IsAuthenticated,)
     serializer_class = serializers.EmailSerializer

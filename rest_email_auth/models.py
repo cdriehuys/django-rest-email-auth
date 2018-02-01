@@ -3,7 +3,7 @@ import logging
 
 from django.conf import settings
 from django.core import mail
-from django.db import models
+from django.db import models, transaction
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.crypto import get_random_string
@@ -33,23 +33,26 @@ class EmailAddress(models.Model):
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name=_('created at'))
-
     email = models.EmailField(
         max_length=255,
         unique=True,
         verbose_name=_('email'))
+    is_primary = models.BooleanField(
+        default=False,
+        help_text=_("Boolean indicating if the email is the user's primary "
+                    "address."),
+        verbose_name=_('is primary'))
+    is_verified = models.BooleanField(
+        default=False,
+        help_text=_('Boolean indicating if the user has verified ownership of '
+                    'the email address.'),
+        verbose_name=_('is verified'))
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='email_addresses',
         related_query_name='email_address',
         verbose_name=_('user'))
-
-    is_verified = models.BooleanField(
-        default=False,
-        help_text=_('Boolean indicating if the user has verified ownership of '
-                    'the email address.'),
-        verbose_name=_('is verified'))
 
     class Meta(object):
         verbose_name = _('email address')
@@ -89,6 +92,26 @@ class EmailAddress(models.Model):
             subject=_('Registration Attempt'))
 
         logger.info('Sent duplicate email notification to: %s', self.email)
+
+    def set_primary(self):
+        """
+        Set this email address as the user's primary email.
+        """
+        query = EmailAddress.objects.filter(is_primary=True, user=self.user)
+        query = query.exclude(pk=self.pk)
+
+        # The transaction is atomic so there is never a gap where a user
+        # has no primary email address.
+        with transaction.atomic():
+            query.update(is_primary=False)
+
+            self.is_primary = True
+            self.save()
+
+        logger.info(
+            'Set %s as the primary email address for %s.',
+            self.email,
+            self.user)
 
 
 class EmailConfirmation(models.Model):
