@@ -2,11 +2,14 @@ Changelog
 =========
 
 
-v1.0.0
+v0.3.0
 ------
 
 Features
+  * :issue:`9,25`: Add documentation and example project.
+  * :issue:`10`: Add custom authentication backend.
   * :issue:`22`: Add endpoints for managing email addresses.
+  * :issue:`24`: Add field to track a user's primary email address.
 
 
 v0.2.1
