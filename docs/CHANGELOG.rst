@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+v0.3.1
+------
+
+Make dependency versions less strict.
+
+
 v0.3.0
 ------
 
