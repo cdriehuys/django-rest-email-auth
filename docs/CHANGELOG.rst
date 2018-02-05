@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+v0.4.0
+------
+
+Documentation
+  * :issue:`29`: Fix typo with installation instructions.
+
+
 v0.3.1
 ------
 

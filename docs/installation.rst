@@ -35,7 +35,7 @@ In :file:`settings.py`, make sure the following settings are present::
         'django.contrib.contenttypes',
 
         # DRF must be listed for the browseable API to work
-        'restframework',
+        'rest_framework',
 
         # Finally, the app itself
         'rest_email_auth',
