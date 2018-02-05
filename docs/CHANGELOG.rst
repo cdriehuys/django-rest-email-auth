@@ -8,6 +8,9 @@ v0.4.0
 Documentation
   * :issue:`29`: Fix typo with installation instructions.
 
+Miscellaneous
+  * :issue:`33`: Fix issue with deployment process breaking example project requirements.
+
 
 v0.3.1
 ------
