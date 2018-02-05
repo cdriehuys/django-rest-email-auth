@@ -51,6 +51,7 @@ In :file:`settings.py`, make sure the following settings are present::
     # The minimal settings dict required for the app
     REST_EMAIL_AUTH = {
         'EMAIL_VERIFICATION_URL': 'https://example.com/verify/{key}',
+        'PASSWORD_RESET_URL': 'https://example.com/reset/{key}',
     }
 
 

@@ -19,7 +19,12 @@ These settings must be configured before the app will function.
 ``EMAIL_VERIFICATION_URL``
 --------------------------
 
-A template for constructing the URL where a user can verify their email address. This URL is sent to the user in the verification email after they add a new email address. Any instance of ``{key}`` in the string will be replace with the key required to confirm that user's email.
+A template for constructing the URL where a user can verify their email address. This URL is sent to the user in the verification email after they add a new email address. Any instance of ``{key}`` in the string will be replaced with the key required to confirm that user's email.
+
+``PASSWORD_RESET_URL``
+----------------------
+
+A template for constructing the URL where a user can reset their password. This URL is sent to the user at the email address specified when the password reset was requested. Any instance of ``{key}`` in the string will be replaced with the key required to complete the password reset.
 
 
 Additional Settings

@@ -88,7 +88,7 @@ All the email addresses associated with a user can be listed using the following
 
 
 Viewing, Modifying, or Deleting a Specific Email Address
-============================================
+========================================================
 
 .. http:get:: /emails/(int:id)/
 
@@ -151,3 +151,37 @@ Viewing, Modifying, or Deleting a Specific Email Address
 
     :status 204: The email address was successfully deleted.
     :status 404: There is no email address with the provided `id` accessible to the requesting user.
+
+
+Password Resets
+===============
+
+Users may request a password reset using any of their verified emails.
+
+Request a Reset
+---------------
+
+Sending a request to this endpoint will email the user a link that they can use to reset their password.
+
+.. http:post:: /request-password-reset/
+
+    Request a new password reset.
+
+    :<json string email: The email address to send the reset token to.
+
+    :status 200: This status is always returned to avoid leaking information about which emails exist in the system.
+
+Reseting a Password
+-------------------
+
+After the user receives an email address with a token they can use to reset their password, this endpoint should be used.
+
+.. http:post:: /reset-password/
+
+    Reset the user's password.
+
+    :<json string key: The token that the user was emailed authorizing the reset.
+    :<json string password: The user's new password.
+
+    :status 200: The user's password was reset successfully.
+    :status 400: Either the provided key does not exist or has expired, or the provided password is invalid.

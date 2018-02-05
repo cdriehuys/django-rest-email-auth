@@ -2,6 +2,7 @@
 """
 
 from django.contrib import admin
+from django.contrib.auth import get_user_model
 
 from rest_email_auth import models
 
@@ -27,3 +28,14 @@ class EmailConfirmationAdmin(admin.ModelAdmin):
     list_display = ('email', 'created_at')
     readonly_fields = ('email', 'key', 'created_at')
     search_fields = ('email__email',)
+
+
+@admin.register(models.PasswordResetToken)
+class PasswordResetTokenAdmin(admin.ModelAdmin):
+    """
+    Admin for ``PasswordResetToken`` instances.
+    """
+    fields = ('email', 'key', 'created_at')
+    list_display = ('email__user', 'email', 'created_at')
+    readonly_fields = fields
+    search_fields = (get_user_model().USERNAME_FIELD, 'email__email')

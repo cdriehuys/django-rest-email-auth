@@ -30,5 +30,6 @@ ROOT_URLCONF = 'test_urls'
 
 # Basic settings required for the app
 REST_EMAIL_AUTH = {
-    'EMAIL_VERIFICATION_URL': 'https://example.com/verify?key={key}',
+    'EMAIL_VERIFICATION_URL': 'https://example.com/verify/{key}',
+    'PASSWORD_RESET_URL': 'https://example.com/reset/{key}',
 }

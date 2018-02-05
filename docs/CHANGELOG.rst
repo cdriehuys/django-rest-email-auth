@@ -5,6 +5,9 @@ Changelog
 v0.4.0
 ------
 
+Featurs
+  * :issue:`30`: Add endpoints to request/perform a password reset.
+
 Documentation
   * :issue:`29`: Fix typo with installation instructions.
 
