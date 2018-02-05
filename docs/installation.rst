@@ -7,7 +7,7 @@ Requirements
 ============
 
   * Python 2.7, 3.4, 3.5, or 3.6
-  * Django 1.10 or above
+  * Django 1.11 or 2.0. Other versions may work, but they are not officially supported.
 
 
 Getting the Package
