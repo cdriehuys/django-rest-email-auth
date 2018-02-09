@@ -17,9 +17,6 @@ from rest_email_auth import models
 logger = logging.getLogger(__name__)
 
 
-UserModel = get_user_model()
-
-
 class EmailSerializer(serializers.ModelSerializer):
     """
     Serializer for email addresses.
@@ -288,8 +285,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
                 'write_only': True,
             },
         }
-        fields = (UserModel.USERNAME_FIELD, 'email', 'password')
-        model = UserModel
+        fields = (get_user_model().USERNAME_FIELD, 'email', 'password')
+        model = get_user_model()
 
     def create(self, validated_data):
         """
@@ -312,7 +309,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
         email = validated_data.pop('email')
         password = validated_data.pop('password')
 
-        user = UserModel(**validated_data)
+        # We don't save the user instance yet in case the provided email
+        # address already exists.
+        user = get_user_model()(**validated_data)
         user.set_password(password)
 
         # We set an ephemeral email property so that it is included in

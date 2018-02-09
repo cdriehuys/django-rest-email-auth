@@ -49,8 +49,11 @@ The duration of the grace period after a confirmation expires before it will be
 deleted by the ``cleanemailconfirmations`` command. See :ref:`clean-email-confirmations` for more information.
 
 
+.. _config-registration-serializer:
+
 ``REGISTRATION_SERIALIZER``
+---------------------------
 
 Default: ``'rest_email_auth.serializers.RegistrationSerializer'``
 
-The path to the serializer class that will be used for the registration endpoint.
+The path to the serializer class that will be used for the registration endpoint. See :ref:`custom-serializers-registration` for more information.
