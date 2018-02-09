@@ -47,3 +47,10 @@ Default: ``datetime.timedelta(days=7)``
 
 The duration of the grace period after a confirmation expires before it will be
 deleted by the ``cleanemailconfirmations`` command. See :ref:`clean-email-confirmations` for more information.
+
+
+``REGISTRATION_SERIALIZER``
+
+Default: ``'rest_email_auth.serializers.RegistrationSerializer'``
+
+The path to the serializer class that will be used for the registration endpoint.

@@ -4,6 +4,7 @@ Settings specific to the application.
 The setting implementation is modeled off of "Django Allauth's" from:
 https://github.com/pennersr/django-allauth/blob/master/allauth/account/app_settings.py
 """
+
 import sys
 
 
@@ -93,6 +94,18 @@ class AppSettings(object):
         The template to use for the password reset url.
         """
         return self._setting('PASSWORD_RESET_URL', '')
+
+    @property
+    def REGISTRATION_SERIALIZER(self):
+        """
+        The serializer class used for registering new users.
+        """
+        from django.utils.module_loading import import_string
+
+        return import_string(
+            self._setting(
+                'REGISTRATION_SERIALIZER',
+                'rest_email_auth.serializers.RegistrationSerializer'))
 
 
 # Ugly? Guido recommends this himself ...

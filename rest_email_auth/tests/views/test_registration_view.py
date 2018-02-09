@@ -2,7 +2,7 @@ import pytest
 
 from rest_framework import status
 
-from rest_email_auth import serializers, views
+from rest_email_auth import app_settings, views
 
 
 registration_view = views.RegistrationView.as_view()
@@ -20,7 +20,7 @@ def test_register(api_rf):
         'username': 'user',
     }
 
-    serializer = serializers.RegistrationSerializer(data=data)
+    serializer = app_settings.REGISTRATION_SERIALIZER(data=data)
     assert serializer.is_valid()
 
     request = api_rf.post('/', data)
