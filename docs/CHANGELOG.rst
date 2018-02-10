@@ -5,8 +5,9 @@ Changelog
 v0.4.0
 ------
 
-Featurs
+Features
   * :issue:`30`: Add endpoints to request/perform a password reset.
+  * :issue:`37`: Allow a custom registration serializer to be provided.
 
 Documentation
   * :issue:`29`: Fix typo with installation instructions.
