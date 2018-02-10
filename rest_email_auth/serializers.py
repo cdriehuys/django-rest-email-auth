@@ -271,6 +271,23 @@ class PasswordResetSerializer(serializers.Serializer):
 
         return key
 
+    def validate_password(self, password):
+        """
+        Validate the provided password by running it through Django's
+        password validation system.
+
+        Returns:
+            The validated password.
+
+        Raises:
+            ValidationError:
+                If the provided password does not pass the configured
+                password validators.
+        """
+        password_validation.validate_password(password)
+
+        return password
+
 
 class RegistrationSerializer(serializers.ModelSerializer):
     """

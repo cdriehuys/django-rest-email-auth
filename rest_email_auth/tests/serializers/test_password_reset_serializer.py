@@ -65,3 +65,23 @@ def test_validate_key_invalid(db):
 
     assert not serializer.is_valid()
     assert set(serializer.errors.keys()) == {'key'}
+
+
+@mock.patch(
+    'rest_email_auth.serializers.password_validation.validate_password',
+    autospec=True)
+def test_validate_password(mock_validate_password):
+    """
+    The serializer should pass the provided password through Django's
+    password validation system.
+    """
+    data = {
+        'key': 'foo',
+        'password': 'foobar',
+    }
+    serializer = serializers.PasswordResetSerializer(data=data)
+
+    serializer.is_valid()
+
+    assert mock_validate_password.call_count == 1
+    assert mock_validate_password.call_args[0] == (data['password'],)
