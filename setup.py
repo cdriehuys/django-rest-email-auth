@@ -9,7 +9,7 @@ def get_description():
 setup(
     # Package meta-data
     name='django-rest-email-auth',
-    version='0.3.1',
+    version='0.4.0',
     description='Django app for email based authentication and registration.',
     long_description=get_description(),
     author='Chathan Driehuys',
@@ -23,7 +23,6 @@ setup(
 
         # Supported versions of Django
         'Framework :: Django',
-        'Framework :: Django :: 1.10',
         'Framework :: Django :: 1.11',
         'Framework :: Django :: 2.0',
 

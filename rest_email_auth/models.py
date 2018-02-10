@@ -1,5 +1,6 @@
 import datetime
 import logging
+import uuid
 
 from django.conf import settings
 from django.core import mail
@@ -9,7 +10,7 @@ from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 
-from rest_email_auth import app_settings
+from rest_email_auth import app_settings, managers
 
 
 logger = logging.getLogger(__name__)
@@ -177,3 +178,65 @@ class EmailConfirmation(models.Model):
             message=message,
             recipient_list=[self.email.email],
             subject=_('Please Verify Your Email Address'))
+
+
+class PasswordResetToken(models.Model):
+    """
+    Store a token that can be used to reset a user's password.
+    """
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        help_text=_('The time at which the password reset token was created.'),
+        verbose_name=_('created at'))
+    email = models.ForeignKey(
+        'rest_email_auth.EmailAddress',
+        editable=False,
+        help_text=_("The email address used to request the password reset."),
+        on_delete=models.CASCADE,
+        related_name='password_reset_tokens',
+        related_query_name='password_reset_token',
+        verbose_name=_('email address'))
+    key = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        help_text=_("The token that authorizes the user to reset their "
+                    "password."),
+        verbose_name=_('key'))
+
+    # Custom managers. We have to explicitly define the default manager
+    # so that it doesn't get overwritten.
+    objects = models.Manager()
+    valid_tokens = managers.ValidPasswordResetTokenManager()
+
+    class Meta:
+        verbose_name = _('password reset token')
+        verbose_name_plural = _('password reset tokens')
+
+    def __str__(self):
+        """
+        Get a string representation of the instance.
+
+        Returns:
+            Information about the token's owner.
+        """
+        return "Password reset token for '{}'".format(self.email.user)
+
+    def send(self):
+        """
+        Send the password reset token to the user.
+        """
+        context = {
+            'reset_url': app_settings.PASSWORD_RESET_URL.format(
+                key=self.key),
+        }
+        message = render_to_string(
+            context=context,
+            template_name='rest_email_auth/emails/reset-password.txt')
+
+        mail.send_mail(
+            from_email=None,
+            message=message,
+            recipient_list=[self.email.email],
+            subject=_('Reset Your Password'))
+
+        logger.info('Sent password reset email to %s', self.email)

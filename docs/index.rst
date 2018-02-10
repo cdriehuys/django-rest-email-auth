@@ -15,6 +15,7 @@
    configuration
    endpoints
    commands
+   custom-serializers
    CHANGELOG
 
 

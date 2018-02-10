@@ -31,6 +31,16 @@ class EmailFactory(factory.django.DjangoModelFactory):
         model = models.EmailAddress
 
 
+class PasswordResetTokenFactory(factory.django.DjangoModelFactory):
+    """
+    Factory for generating password reset tokens.
+    """
+    email = factory.SubFactory('rest_email_auth.factories.EmailFactory')
+
+    class Meta(object):
+        model = 'rest_email_auth.PasswordResetToken'
+
+
 class UserFactory(factory.django.DjangoModelFactory):
     """
     Factory for generating Django user instances.

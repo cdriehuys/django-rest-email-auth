@@ -26,9 +26,19 @@ urlpatterns = [
         name='register'),
 
     url(
+        r'^request-password-reset/$',
+        views.PasswordResetRequestView.as_view(),
+        name='password-reset-request'),
+
+    url(
         r'^resend-verification/$',
         views.ResendVerificationView.as_view(),
         name='resend-verification'),
+
+    url(
+        r'^reset-password/$',
+        views.PasswordResetView.as_view(),
+        name='password-reset'),
 
     url(
         r'^verify-email/$',

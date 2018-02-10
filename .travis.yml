@@ -1,3 +1,4 @@
+---
 language: python
 python:
   - 2.7
@@ -8,9 +9,14 @@ python:
 cache: pip
 
 env:
-  matrix:
-    - DJANGO='>= 1.10, < 1.11'
-    - DJANGO='>= 1.11, < 1.12'
+  - DJANGO='>= 1.11, < 1.12'
+  - DJANGO='>= 2.0, < 2.1'
+
+matrix:
+  exclude:
+    # Django dropped support for Python 2 in versions 2.0 and above
+    - python: 2.7
+      env: DJANGO='>= 2.0, < 2.1'
 
 install:
   - pip install --upgrade pip

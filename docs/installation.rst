@@ -7,7 +7,7 @@ Requirements
 ============
 
   * Python 2.7, 3.4, 3.5, or 3.6
-  * Django 1.10 or above
+  * Django 1.11 or 2.0. Other versions may work, but they are not officially supported.
 
 
 Getting the Package
@@ -35,7 +35,7 @@ In :file:`settings.py`, make sure the following settings are present::
         'django.contrib.contenttypes',
 
         # DRF must be listed for the browseable API to work
-        'restframework',
+        'rest_framework',
 
         # Finally, the app itself
         'rest_email_auth',
@@ -51,6 +51,7 @@ In :file:`settings.py`, make sure the following settings are present::
     # The minimal settings dict required for the app
     REST_EMAIL_AUTH = {
         'EMAIL_VERIFICATION_URL': 'https://example.com/verify/{key}',
+        'PASSWORD_RESET_URL': 'https://example.com/reset/{key}',
     }
 
 
