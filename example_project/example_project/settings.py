@@ -141,4 +141,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 REST_EMAIL_AUTH = {
     'EMAIL_VERIFICATION_URL': 'https://example.com/verify/{key}',
+    'PASSWORD_RESET_URL': 'https://example.com/reset/{key}',
 }
