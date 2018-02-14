@@ -1,6 +1,12 @@
 Changelog
 =========
 
+v0.4.1
+------
+
+Bugfixes
+  * :issue:`40`: Fix issue with invalid admin fields.
+
 
 v0.4.0
 ------
