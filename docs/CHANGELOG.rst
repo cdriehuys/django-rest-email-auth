@@ -1,6 +1,13 @@
 Changelog
 =========
 
+v0.4.2
+------
+
+Bugfixes
+  * :issue:`43`: Fix issue with registration view not respecting overridden registration serializer setting.
+
+
 v0.4.1
 ------
 
