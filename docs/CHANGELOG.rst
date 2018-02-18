@@ -1,6 +1,14 @@
 Changelog
 =========
 
+
+v0.4.3
+------
+
+Bugfixes
+  * :issue:`44`: Fix issue with templates not being included in distribution.
+
+
 v0.4.2
 ------
 
