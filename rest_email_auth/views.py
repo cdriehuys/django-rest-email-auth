@@ -4,7 +4,7 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
-from rest_email_auth import serializers
+from rest_email_auth import app_settings, serializers
 from rest_email_auth.generics import SerializerSaveView
 
 
@@ -112,7 +112,12 @@ class RegistrationView(generics.CreateAPIView):
     """
     Register a new user.
     """
-    serializer_class = serializers.RegistrationSerializer
+
+    def get_serializer_class(self):
+        """
+        Get the serializer class used to register new users.
+        """
+        return app_settings.REGISTRATION_SERIALIZER
 
 
 class ResendVerificationView(SerializerSaveView):
