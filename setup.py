@@ -9,7 +9,7 @@ def get_description():
 setup(
     # Package meta-data
     name='django-rest-email-auth',
-    version='0.4.2',
+    version='0.4.3',
     description='Django app for email based authentication and registration.',
     long_description=get_description(),
     author='Chathan Driehuys',
@@ -41,6 +41,7 @@ setup(
     ],
 
     # Include the actual source code
+    include_package_data=True,
     packages=find_packages(),
 
     # Dependencies
