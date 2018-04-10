@@ -35,6 +35,7 @@ def test_confirm_email(
 
     assert serializer.data == expected
     assert email.is_verified
+    assert email.confirmations.count() == 0
 
 
 def test_validate_expired(email_confirmation_factory):

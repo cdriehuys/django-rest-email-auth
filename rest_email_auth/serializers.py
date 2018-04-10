@@ -142,6 +142,7 @@ class EmailVerificationSerializer(serializers.Serializer):
         Confirm the email address matching the confirmation key.
         """
         self._confirmation.confirm()
+        self._confirmation.delete()
 
     def validate(self, data):
         """

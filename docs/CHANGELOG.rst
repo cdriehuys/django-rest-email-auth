@@ -7,6 +7,7 @@ In Development
 
 Bugfixes
   * :issue:`42`: Fix issue with creating multiple primary emails.
+  * :issue:`45`: Confirmation tokens are now deleted once they have been used.
 
 Miscellaneous
   * :issue:`41`: Fix useless test.
