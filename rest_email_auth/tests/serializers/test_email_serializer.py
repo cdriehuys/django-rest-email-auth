@@ -109,10 +109,7 @@ def test_serialize(email_factory):
     assert serializer.data == expected
 
 
-@mock.patch(
-    'rest_email_auth.serializers.models.EmailAddress.set_primary',
-    autospec=True)
-def test_update_is_primary(mock_set_primary, email_factory):
+def test_update_is_primary(email_factory):
     """
     If an email address is verified, it should be able to be marked as
     the user's primary address.
@@ -125,15 +122,16 @@ def test_update_is_primary(mock_set_primary, email_factory):
     serializer = serializers.EmailSerializer(email, data=data, partial=True)
     assert serializer.is_valid()
 
-    email = serializer.save()
+    with mock.patch.object(
+            email,
+            'set_primary',
+            autospec=True) as mock_set_primary:
+        email = serializer.save()
 
-    assert email.set_primary.call_count == 1
+    assert mock_set_primary.call_count == 1
 
 
-@mock.patch(
-    'rest_email_auth.serializers.models.EmailAddress.set_primary',
-    autospec=True)
-def test_update_is_primary_false(mock_set_primary, email_factory):
+def test_update_is_primary_false(email_factory):
     """
     Updating 'is_primary' to false should not call set_primary.
     """
@@ -145,9 +143,13 @@ def test_update_is_primary_false(mock_set_primary, email_factory):
     serializer = serializers.EmailSerializer(email, data=data, partial=True)
     assert serializer.is_valid()
 
-    email = serializer.save()
+    with mock.patch.object(
+            email,
+            'set_primary',
+            autospec=True) as mock_set_primary:
+        email = serializer.save()
 
-    assert email.set_primary.call_count == 0
+    assert mock_set_primary.call_count == 0
 
 
 def test_validate_changed_email(email_factory):

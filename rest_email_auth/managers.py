@@ -1,7 +1,27 @@
-from django.db import models
+from django.db import models, transaction
 from django.utils import timezone
 
 from rest_email_auth import app_settings
+
+
+class EmailAddressManager(models.Manager):
+    """
+    Manager for email address instances.
+    """
+
+    def create(self, *args, **kwargs):
+        """
+        Create a new email address.
+        """
+        is_primary = kwargs.pop('is_primary', False)
+
+        with transaction.atomic():
+            email = super(EmailAddressManager, self).create(*args, **kwargs)
+
+            if is_primary:
+                email.set_primary()
+
+        return email
 
 
 class ValidPasswordResetTokenManager(models.Manager):
