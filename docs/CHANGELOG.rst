@@ -5,6 +5,9 @@ Changelog
 In Development
 --------------
 
+Features
+  * :issue:`47`: Send a signal out when a user registers.
+
 Bugfixes
   * :issue:`42`: Fix issue with creating multiple primary emails.
   * :issue:`45`: Confirmation tokens are now deleted once they have been used.

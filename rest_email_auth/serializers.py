@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import serializers
 
-from rest_email_auth import models
+from rest_email_auth import models, signals
 
 
 logger = logging.getLogger(__name__)
@@ -348,6 +348,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
                 email=email,
                 user=user)
             email_instance.send_confirmation()
+
+            signals.user_registered.send(sender=self.__class__, user=user)
 
         return user
 
