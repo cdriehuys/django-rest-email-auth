@@ -27,7 +27,7 @@ install:
 
 script:
   - flake8
-  - ./manage.py check
+  - ./example_project/manage.py check
   - coverage run -m pytest
 
 after_success: codecov

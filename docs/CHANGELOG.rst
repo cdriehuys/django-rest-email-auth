@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+In Development
+--------------
+
+Miscellaneous
+  * :issue:`41`: Fix useless test.
+
+
 v0.4.3
 ------
 
