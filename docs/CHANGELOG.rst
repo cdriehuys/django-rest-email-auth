@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-In Development
---------------
+v1.0.0
+------
 
 Features
   * :issue:`47`: Send a signal out when a user registers.
