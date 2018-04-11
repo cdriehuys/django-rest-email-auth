@@ -4,11 +4,19 @@
 import copy
 import logging
 
+try:
+    from unittest import mock
+except ImportError:
+    import mock
+
 import pytest
 
 from rest_framework.test import APIClient, APIRequestFactory
 
-from rest_email_auth import app_settings as application_settings, factories
+from rest_email_auth import (
+    app_settings as application_settings,
+    factories,
+    signals)
 
 
 logger = logging.getLogger(__name__)
@@ -125,6 +133,19 @@ def password_reset_token_factory(db):
         The factory used to create ``PasswordResetToken`` instances.
     """
     return factories.PasswordResetTokenFactory
+
+
+@pytest.fixture
+def registration_listener():
+    """
+    Fixture to get a listener for the 'user_registered' signal.
+    """
+    listener = mock.Mock(name='Mock Registration Listener')
+    signals.user_registered.connect(listener)
+
+    yield listener
+
+    signals.user_registered.disconnect(listener)
 
 
 @pytest.fixture

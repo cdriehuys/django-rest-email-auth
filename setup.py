@@ -9,7 +9,7 @@ def get_description():
 setup(
     # Package meta-data
     name='django-rest-email-auth',
-    version='0.4.3',
+    version='1.0.0',
     description='Django app for email based authentication and registration.',
     long_description=get_description(),
     author='Chathan Driehuys',
@@ -19,7 +19,7 @@ setup(
 
     # Additional classifiers for PyPI
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 5 - Production/Stable',
 
         # Supported versions of Django
         'Framework :: Django',

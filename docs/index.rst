@@ -16,6 +16,7 @@
    endpoints
    commands
    custom-serializers
+   advanced-usage
    CHANGELOG
 
 

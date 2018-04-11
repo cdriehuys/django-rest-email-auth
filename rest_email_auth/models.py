@@ -55,6 +55,9 @@ class EmailAddress(models.Model):
         related_query_name='email_address',
         verbose_name=_('user'))
 
+    # Use custom manager
+    objects = managers.EmailAddressManager()
+
     class Meta(object):
         verbose_name = _('email address')
         verbose_name_plural = _('email addresses')

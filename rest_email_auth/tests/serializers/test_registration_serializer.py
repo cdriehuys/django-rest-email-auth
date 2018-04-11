@@ -11,7 +11,7 @@ from rest_email_auth import serializers
 
 
 @pytest.mark.django_db
-def test_create_new_user():
+def test_create_new_user(registration_listener):
     """
     Saving a serializer with valid data should create a new user.
     """
@@ -40,8 +40,11 @@ def test_create_new_user():
     # Make sure we sent out an email confirmation
     assert mock_send_confirmation.call_count == 1
 
+    # Make sure we sent a registration event
+    assert registration_listener.call_count == 1
 
-def test_register_duplicate_email(email_factory):
+
+def test_register_duplicate_email(email_factory, registration_listener):
     """
     Attempting to register with an email that has already been verified
     should send an email to the owner of the email address notifying
@@ -65,6 +68,9 @@ def test_register_duplicate_email(email_factory):
 
     assert get_user_model().objects.count() == 1
     assert mock_send_duplicate_signup.call_count == 1
+
+    # We should not get a registration event for a duplicate email
+    assert registration_listener.call_count == 0
 
 
 @pytest.mark.django_db
