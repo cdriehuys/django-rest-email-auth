@@ -19,7 +19,7 @@ setup(
 
     # Additional classifiers for PyPI
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 5 - Production/Stable',
 
         # Supported versions of Django
         'Framework :: Django',
