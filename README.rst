@@ -28,9 +28,10 @@ Overview
 This package provides a simple way to enable authentication with email addresses for a REST API.
 
 Features:
-  * Verify user email addresses
-  * Authenticate using any of a user's email addresses
+  * Verification of user email addresses
+  * Authentication using any of a user's verified email addresses
   * Registration of new users
+  * Password resets using the verified emails
 
 
 License
