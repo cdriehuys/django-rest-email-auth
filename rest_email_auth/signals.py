@@ -8,4 +8,6 @@ processes from this module.
 from django import dispatch
 
 
+email_verified = dispatch.Signal(providing_args=['email'])
+
 user_registered = dispatch.Signal(providing_args=['user'])

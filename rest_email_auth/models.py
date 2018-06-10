@@ -10,7 +10,7 @@ from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 
-from rest_email_auth import app_settings, managers
+from rest_email_auth import app_settings, managers, signals
 
 
 logger = logging.getLogger(__name__)
@@ -147,6 +147,8 @@ class EmailConfirmation(models.Model):
         """
         self.email.is_verified = True
         self.email.save()
+
+        signals.email_verified.send(email=self.email, sender=self.__class__)
 
         logger.info('Verified email address: %s', self.email.email)
 

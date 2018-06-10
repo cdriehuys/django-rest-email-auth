@@ -10,7 +10,10 @@ from django.template.loader import render_to_string
 from rest_email_auth import models
 
 
-def test_confirm(email_confirmation_factory, email_factory):
+def test_confirm(
+        email_confirmation_factory,
+        email_factory,
+        email_verification_listener):
     """
     Confirming a confirmation should mark the associated email address
     as verified.
@@ -22,6 +25,10 @@ def test_confirm(email_confirmation_factory, email_factory):
     email.refresh_from_db()
 
     assert email.is_verified
+    assert email_verification_listener.call_count == 1
+    assert email_verification_listener.call_args[1]['sender'] == \
+        confirmation.__class__
+    assert email_verification_listener.call_args[1]['email'] == email
 
 
 def test_create_email_confirmation(email_factory):
