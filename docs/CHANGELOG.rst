@@ -7,6 +7,7 @@ v1.1.0
 
 Features
   * :issue:`53`: Emit a signal when an email address is verified.
+  * :issue:`54`: Normalize email addresses.
 
 
 v1.0.0
