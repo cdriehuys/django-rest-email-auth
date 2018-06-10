@@ -125,6 +125,19 @@ def email_factory(db):
 
 
 @pytest.fixture
+def email_verification_listener():
+    """
+    Fixture to get a listener for the 'email_verified' signal.
+    """
+    listener = mock.Mock(name='Mock Email Verification Listener')
+    signals.email_verified.connect(listener)
+
+    yield listener
+
+    signals.email_verified.disconnect(listener)
+
+
+@pytest.fixture
 def password_reset_token_factory(db):
     """
     Fixture to get the factory usedd to create password reset tokens.

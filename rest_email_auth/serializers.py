@@ -90,6 +90,9 @@ class EmailSerializer(serializers.ModelSerializer):
         """
         Validate the provided email address.
 
+        The email address is first modified to match the RFC spec.
+        Namely, the domain portion of the email is lowercased.
+
         Returns:
             The validated email address.
 
@@ -98,6 +101,9 @@ class EmailSerializer(serializers.ModelSerializer):
                 If the serializer is bound and the provided email
                 doesn't match the existing address.
         """
+        user, domain = email.rsplit('@', 1)
+        email = '@'.join([user, domain.lower()])
+
         if self.instance and email and self.instance.email != email:
             raise serializers.ValidationError(
                 _("Existing emails may not be edited. Create a new one "
@@ -352,6 +358,23 @@ class RegistrationSerializer(serializers.ModelSerializer):
             signals.user_registered.send(sender=self.__class__, user=user)
 
         return user
+
+    def validate_email(self, email):
+        """
+        Validate the provided email address.
+
+        Args:
+            email:
+                The email address to validate.
+
+        Returns:
+            The provided email address, transformed to match the RFC
+            spec. Namely, the domain portion of the email must be
+            lowercase.
+        """
+        user, domain = email.rsplit('@', 1)
+
+        return '@'.join([user, domain.lower()])
 
     def validate_password(self, password):
         """

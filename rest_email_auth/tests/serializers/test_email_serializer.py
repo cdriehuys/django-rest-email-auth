@@ -184,6 +184,29 @@ def test_validate_create_primary():
     assert set(serializer.errors.keys()) == {'is_primary'}
 
 
+def test_validate_email_lowercase_domain():
+    """
+    The registration serializer should not change an email address with
+    a lowercase domain.
+    """
+    email = 'Test@example.com'
+    serializer = serializers.EmailSerializer()
+
+    assert serializer.validate_email(email) == email
+
+
+def test_validate_email_mixed_case_domain():
+    """
+    If the domain portion of the email is mixed case, it should be
+    converted to lowercase.
+    """
+    email = 'Test@ExaMple.com'
+    expected = 'Test@example.com'
+    serializer = serializers.EmailSerializer()
+
+    assert serializer.validate_email(email) == expected
+
+
 def test_validate_make_unverified_primary(email_factory):
     """
     Attempting to mark an existing but unverified email address as the
