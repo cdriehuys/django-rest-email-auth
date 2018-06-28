@@ -3,12 +3,12 @@ import logging
 import uuid
 
 from django.conf import settings
-from django.core import mail
 from django.db import models, transaction
-from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
+
+import email_utils
 
 from rest_email_auth import app_settings, managers, signals
 
@@ -84,16 +84,12 @@ class EmailAddress(models.Model):
         """
         Send a notification about a duplicate signup.
         """
-        context = {}
-        message = render_to_string(
-            context=context,
-            template_name='rest_email_auth/emails/duplicate-email.txt')
-
-        mail.send_mail(
-            from_email=None,
-            message=message,
+        email_utils.send_email(
+            from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[self.email],
-            subject=_('Registration Attempt'))
+            subject=_('Registration Attempt'),
+            template_name='rest_email_auth/emails/duplicate-email',
+        )
 
         logger.info('Sent duplicate email notification to: %s', self.email)
 
@@ -174,15 +170,20 @@ class EmailConfirmation(models.Model):
             'verification_url': app_settings.EMAIL_VERIFICATION_URL.format(
                 key=self.key),
         }
-        message = render_to_string(
-            context=context,
-            template_name='rest_email_auth/emails/verify-email.txt')
 
-        mail.send_mail(
-            from_email=None,
-            message=message,
+        email_utils.send_email(
+            context=context,
+            from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[self.email.email],
-            subject=_('Please Verify Your Email Address'))
+            subject=_('Please Verify Your Email Address'),
+            template_name='rest_email_auth/emails/verify-email',
+        )
+
+        logger.info(
+            'Sent confirmation email to %s for user #%d',
+            self.email.email,
+            self.email.user.id,
+        )
 
 
 class PasswordResetToken(models.Model):
@@ -234,14 +235,13 @@ class PasswordResetToken(models.Model):
             'reset_url': app_settings.PASSWORD_RESET_URL.format(
                 key=self.key),
         }
-        message = render_to_string(
-            context=context,
-            template_name='rest_email_auth/emails/reset-password.txt')
 
-        mail.send_mail(
-            from_email=None,
-            message=message,
+        email_utils.send_email(
+            context=context,
+            from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[self.email.email],
-            subject=_('Reset Your Password'))
+            subject=_('Reset Your Password'),
+            template_name='rest_email_auth/emails/reset-password',
+        )
 
         logger.info('Sent password reset email to %s', self.email)

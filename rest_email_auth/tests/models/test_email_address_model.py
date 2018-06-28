@@ -4,7 +4,6 @@ except ImportError:
     import mock
 
 from django.conf import settings
-from django.template.loader import render_to_string
 
 from rest_email_auth import models
 
@@ -51,7 +50,8 @@ def test_send_confirmation(email_factory):
     assert mock_send.call_count == 1
 
 
-def test_send_duplicate_notification(email_factory, mailoutbox):
+@mock.patch('rest_email_auth.models.email_utils.send_email')
+def test_send_duplicate_notification(mock_send_email, email_factory):
     """
     Sending a duplicate signup notification should send the user an
     email stating that their email was used to register even though
@@ -60,19 +60,13 @@ def test_send_duplicate_notification(email_factory, mailoutbox):
     email = email_factory()
     email.send_duplicate_notification()
 
-    context = {}
-    message = render_to_string(
-        context=context,
-        template_name='rest_email_auth/emails/duplicate-email.txt')
-
-    assert len(mailoutbox) == 1
-
-    msg = mailoutbox[0]
-
-    assert msg.body == message
-    assert msg.from_email == settings.DEFAULT_FROM_EMAIL
-    assert msg.subject == 'Registration Attempt'
-    assert msg.to == [email.email]
+    assert mock_send_email.call_count == 1
+    assert mock_send_email.call_args[1] == {
+        'from_email': settings.DEFAULT_FROM_EMAIL,
+        'recipient_list': [email.email],
+        'subject': 'Registration Attempt',
+        'template_name': 'rest_email_auth/emails/duplicate-email',
+    }
 
 
 def test_set_primary(email_factory):

@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+In Development
+--------------
+
+Features:
+  * Use ``django-email-utils`` for email sending. This allows us to easily send both HTML and plain text templated emails.
+
+
 v1.1.0
 ------
 

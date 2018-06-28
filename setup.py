@@ -47,5 +47,6 @@ setup(
     # Dependencies
     install_requires=[
         'Django >= 1.10',
+        'django-email-utils',
         'djangorestframework >= 3.0',
     ])
