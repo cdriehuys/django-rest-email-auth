@@ -1,6 +1,9 @@
 import datetime
 
-from django.template.loader import render_to_string
+try:
+    from unittest import mock
+except ImportError:
+    import mock
 
 from rest_email_auth import models
 
@@ -23,9 +26,8 @@ def test_string_conversion(password_reset_token_factory):
     assert str(token) == expected
 
 
-# For some reason, if 'mailoutbox' is listed before
-# 'password_reset_token_factory', the test breaks.
-def test_send(password_reset_token_factory, mailoutbox, settings):
+@mock.patch('rest_email_auth.models.email_utils.send_email')
+def test_send(mock_send_email, password_reset_token_factory, settings):
     """
     Sending the token should send an email to the address associated
     with the token.
@@ -43,18 +45,15 @@ def test_send(password_reset_token_factory, mailoutbox, settings):
     context = {
         'reset_url': url,
     }
-    expected_content = render_to_string(
-        context=context,
-        template_name='rest_email_auth/emails/reset-password.txt')
 
-    assert len(mailoutbox) == 1
-
-    msg = mailoutbox[0]
-
-    assert msg.body == expected_content
-    assert msg.from_email == settings.DEFAULT_FROM_EMAIL
-    assert msg.subject == 'Reset Your Password'
-    assert msg.to == [token.email.email]
+    assert mock_send_email.call_count == 1
+    assert mock_send_email.call_args[1] == {
+        'context': context,
+        'from_email': settings.DEFAULT_FROM_EMAIL,
+        'recipient_list': [token.email.email],
+        'subject': 'Reset Your Password',
+        'template_name': 'rest_email_auth/emails/reset-password',
+    }
 
 
 def test_valid_tokens(password_reset_token_factory, app_settings):
