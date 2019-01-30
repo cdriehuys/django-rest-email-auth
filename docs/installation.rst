@@ -21,7 +21,7 @@ To get the most recent release::
 
 To get the most recent development build::
 
-    $ pip install git+https://github.com/cdriehuys/django-rest-email-auth.git@development#egg=django-rest-email-auth
+    $ pip install git+https://github.com/cdriehuys/django-rest-email-auth.git#egg=django-rest-email-auth
 
 
 Required Configuration
