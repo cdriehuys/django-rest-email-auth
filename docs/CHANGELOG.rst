@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+v2.0.1
+------
+
+Bugfixes
+  * Fix clobbered version name.
+
+
 v2.0.0
 ------
 
