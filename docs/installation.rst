@@ -66,11 +66,16 @@ URLs
 
 After the settings have been configured, include the app's URLs in :file:`urls.py`::
 
-    from django.conf.urls import include, url
+    from django.urls import include, path
+    # If you're using Django 1.11:
+    # from django.conf.urls import include, url
 
 
     urlpatterns = [
-        url(r'account/', include('rest_email_auth.urls')),
+        path('account/', include('rest_email_auth.urls')),
+
+        # If you're using Django 1.11:
+        # url(r'account/', include('rest_email_auth.urls')),
     ]
 
 
