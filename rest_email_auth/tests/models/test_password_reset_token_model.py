@@ -26,33 +26,30 @@ def test_string_conversion(password_reset_token_factory):
     assert str(token) == expected
 
 
-@mock.patch('rest_email_auth.models.email_utils.send_email')
+@mock.patch("rest_email_auth.models.email_utils.send_email")
 def test_send(mock_send_email, password_reset_token_factory, settings):
     """
     Sending the token should send an email to the address associated
     with the token.
     """
     settings.REST_EMAIL_AUTH = {
-        'PASSWORD_RESET_URL': 'https://example.com/reset/{key}',
+        "PASSWORD_RESET_URL": "https://example.com/reset/{key}"
     }
 
     token = password_reset_token_factory()
     token.send()
 
-    url = settings.REST_EMAIL_AUTH['PASSWORD_RESET_URL'].format(
-        key=token.key)
+    url = settings.REST_EMAIL_AUTH["PASSWORD_RESET_URL"].format(key=token.key)
 
-    context = {
-        'reset_url': url,
-    }
+    context = {"reset_url": url}
 
     assert mock_send_email.call_count == 1
     assert mock_send_email.call_args[1] == {
-        'context': context,
-        'from_email': settings.DEFAULT_FROM_EMAIL,
-        'recipient_list': [token.email.email],
-        'subject': 'Reset Your Password',
-        'template_name': 'rest_email_auth/emails/reset-password',
+        "context": context,
+        "from_email": settings.DEFAULT_FROM_EMAIL,
+        "recipient_list": [token.email.email],
+        "subject": "Reset Your Password",
+        "template_name": "rest_email_auth/emails/reset-password",
     }
 
 

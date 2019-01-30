@@ -9,7 +9,6 @@ import sys
 
 
 class AppSettings(object):
-
     def __init__(self):
         """
         Perform some basic settings checks.
@@ -38,7 +37,7 @@ class AppSettings(object):
         """
         from django.conf import settings
 
-        settings_dict = getattr(settings, 'REST_EMAIL_AUTH', {})
+        settings_dict = getattr(settings, "REST_EMAIL_AUTH", {})
 
         return settings_dict.get(name, default)
 
@@ -52,8 +51,8 @@ class AppSettings(object):
         import datetime
 
         return self._setting(
-            'CONFIRMATION_EXPIRATION',
-            datetime.timedelta(days=1))
+            "CONFIRMATION_EXPIRATION", datetime.timedelta(days=1)
+        )
 
     @property
     def CONFIRMATION_SAVE_PERIOD(self):
@@ -65,15 +64,15 @@ class AppSettings(object):
         import datetime
 
         return self._setting(
-            'CONFIRMATION_SAVE_PERIOD',
-            datetime.timedelta(days=7))
+            "CONFIRMATION_SAVE_PERIOD", datetime.timedelta(days=7)
+        )
 
     @property
     def EMAIL_VERIFICATION_URL(self):
         """
         The template to use for the email verification url.
         """
-        return self._setting('EMAIL_VERIFICATION_URL', '')
+        return self._setting("EMAIL_VERIFICATION_URL", "")
 
     @property
     def PASSWORD_RESET_EXPIRATION(self):
@@ -85,15 +84,15 @@ class AppSettings(object):
         import datetime
 
         return self._setting(
-            'PASSWORD_RESET_EXPIRATION',
-            datetime.timedelta(hours=1))
+            "PASSWORD_RESET_EXPIRATION", datetime.timedelta(hours=1)
+        )
 
     @property
     def PASSWORD_RESET_URL(self):
         """
         The template to use for the password reset url.
         """
-        return self._setting('PASSWORD_RESET_URL', '')
+        return self._setting("PASSWORD_RESET_URL", "")
 
     @property
     def REGISTRATION_SERIALIZER(self):
@@ -104,8 +103,10 @@ class AppSettings(object):
 
         return import_string(
             self._setting(
-                'REGISTRATION_SERIALIZER',
-                'rest_email_auth.serializers.RegistrationSerializer'))
+                "REGISTRATION_SERIALIZER",
+                "rest_email_auth.serializers.RegistrationSerializer",
+            )
+        )
 
 
 # Ugly? Guido recommends this himself ...

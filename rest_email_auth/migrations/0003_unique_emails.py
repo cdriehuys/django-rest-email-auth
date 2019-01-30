@@ -7,14 +7,14 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('rest_email_auth', '0002_emailconfirmation'),
-    ]
+    dependencies = [("rest_email_auth", "0002_emailconfirmation")]
 
     operations = [
         migrations.AlterField(
-            model_name='emailaddress',
-            name='email',
-            field=models.EmailField(max_length=255, unique=True, verbose_name='email'),
-        ),
+            model_name="emailaddress",
+            name="email",
+            field=models.EmailField(
+                max_length=255, unique=True, verbose_name="email"
+            ),
+        )
     ]

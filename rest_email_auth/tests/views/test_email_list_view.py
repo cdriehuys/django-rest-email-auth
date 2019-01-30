@@ -4,7 +4,7 @@ from rest_framework.reverse import reverse
 from rest_email_auth import serializers
 
 
-url = reverse('rest-email-auth:email-list')
+url = reverse("rest-email-auth:email-list")
 
 
 def test_create_email(api_client, user_factory):
@@ -15,9 +15,7 @@ def test_create_email(api_client, user_factory):
     user = user_factory()
     api_client.force_authenticate(user=user)
 
-    data = {
-        'email': 'test-add@example.com',
-    }
+    data = {"email": "test-add@example.com"}
 
     response = api_client.post(url, data)
 
@@ -41,8 +39,8 @@ def test_list_emails(api_client, email_factory, user_factory):
     email_factory()
 
     serializer = serializers.EmailSerializer(
-        user.email_addresses.all(),
-        many=True)
+        user.email_addresses.all(), many=True
+    )
 
     api_client.force_authenticate(user=user)
 

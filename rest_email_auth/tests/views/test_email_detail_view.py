@@ -14,7 +14,7 @@ def test_delete(api_client, email_factory):
 
     api_client.force_authenticate(user=user)
 
-    url = reverse('rest-email-auth:email-detail', kwargs={'pk': email.pk})
+    url = reverse("rest-email-auth:email-detail", kwargs={"pk": email.pk})
     response = api_client.delete(url)
 
     assert response.status_code == status.HTTP_204_NO_CONTENT
@@ -30,7 +30,7 @@ def test_get(api_client, email_factory):
     email = email_factory()
     api_client.force_authenticate(user=email.user)
 
-    url = reverse('rest-email-auth:email-detail', kwargs={'pk': email.pk})
+    url = reverse("rest-email-auth:email-detail", kwargs={"pk": email.pk})
     response = api_client.get(url)
 
     assert response.status_code == status.HTTP_200_OK
@@ -45,7 +45,7 @@ def test_get_anonymous(api_client):
     Sending a GET request to the view as an anonymous user should return
     a permissions error.
     """
-    url = reverse('rest-email-auth:email-detail', kwargs={'pk': 1})
+    url = reverse("rest-email-auth:email-detail", kwargs={"pk": 1})
     response = api_client.get(url)
 
     assert response.status_code == status.HTTP_403_FORBIDDEN
@@ -59,7 +59,7 @@ def test_get_other_user_email(api_client, email_factory, user_factory):
     email = email_factory()
     api_client.force_authenticate(user=user_factory())
 
-    url = reverse('rest-email-auth:email-detail', kwargs={'pk': email.pk})
+    url = reverse("rest-email-auth:email-detail", kwargs={"pk": email.pk})
     response = api_client.get(url)
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
@@ -71,13 +71,11 @@ def test_update(api_client, email_factory):
     email address associated with the endpoint.
     """
     email = email_factory(is_primary=False, is_verified=True)
-    data = {
-        'is_primary': True,
-    }
+    data = {"is_primary": True}
 
     api_client.force_authenticate(user=email.user)
 
-    url = reverse('rest-email-auth:email-detail', kwargs={'pk': email.pk})
+    url = reverse("rest-email-auth:email-detail", kwargs={"pk": email.pk})
     response = api_client.patch(url, data)
 
     assert response.status_code == status.HTTP_200_OK

@@ -16,7 +16,8 @@ from rest_framework.test import APIClient, APIRequestFactory
 from rest_email_auth import (
     app_settings as application_settings,
     factories,
-    signals)
+    signals,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -43,13 +44,14 @@ class MutableAppSettings(object):
                 rolled back after each test.
         """
         settings_obj.REST_EMAIL_AUTH = copy.deepcopy(
-            settings_obj.REST_EMAIL_AUTH)
+            settings_obj.REST_EMAIL_AUTH
+        )
 
         # Since we pass __setattr__ through to the settings dictionary
         # we have to set attributes by modifying the instance's __dict__
         # directly.
-        self.__dict__['settings_obj'] = settings_obj
-        self.__dict__['original'] = copy.deepcopy(settings_obj.REST_EMAIL_AUTH)
+        self.__dict__["settings_obj"] = settings_obj
+        self.__dict__["original"] = copy.deepcopy(settings_obj.REST_EMAIL_AUTH)
 
     def __getattr__(self, name):
         """
@@ -129,7 +131,7 @@ def email_verification_listener():
     """
     Fixture to get a listener for the 'email_verified' signal.
     """
-    listener = mock.Mock(name='Mock Email Verification Listener')
+    listener = mock.Mock(name="Mock Email Verification Listener")
     signals.email_verified.connect(listener)
 
     yield listener
@@ -153,7 +155,7 @@ def registration_listener():
     """
     Fixture to get a listener for the 'user_registered' signal.
     """
-    listener = mock.Mock(name='Mock Registration Listener')
+    listener = mock.Mock(name="Mock Registration Listener")
     signals.user_registered.connect(listener)
 
     yield listener

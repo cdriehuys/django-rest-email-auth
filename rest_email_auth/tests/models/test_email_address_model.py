@@ -13,9 +13,8 @@ def test_create(user_factory):
     Test creating an email address.
     """
     email = models.EmailAddress.objects.create(
-        email='test@example.com',
-        is_primary=True,
-        user=user_factory())
+        email="test@example.com", is_primary=True, user=user_factory()
+    )
 
     assert not email.is_verified
 
@@ -42,15 +41,15 @@ def test_send_confirmation(email_factory):
     email = email_factory()
 
     with mock.patch(
-            'rest_email_auth.models.EmailConfirmation.send',
-            autospec=True) as mock_send:
+        "rest_email_auth.models.EmailConfirmation.send", autospec=True
+    ) as mock_send:
         email.send_confirmation()
 
     assert email.confirmations.count() == 1
     assert mock_send.call_count == 1
 
 
-@mock.patch('rest_email_auth.models.email_utils.send_email')
+@mock.patch("rest_email_auth.models.email_utils.send_email")
 def test_send_duplicate_notification(mock_send_email, email_factory):
     """
     Sending a duplicate signup notification should send the user an
@@ -62,10 +61,10 @@ def test_send_duplicate_notification(mock_send_email, email_factory):
 
     assert mock_send_email.call_count == 1
     assert mock_send_email.call_args[1] == {
-        'from_email': settings.DEFAULT_FROM_EMAIL,
-        'recipient_list': [email.email],
-        'subject': 'Registration Attempt',
-        'template_name': 'rest_email_auth/emails/duplicate-email',
+        "from_email": settings.DEFAULT_FROM_EMAIL,
+        "recipient_list": [email.email],
+        "subject": "Registration Attempt",
+        "template_name": "rest_email_auth/emails/duplicate-email",
     }
 
 

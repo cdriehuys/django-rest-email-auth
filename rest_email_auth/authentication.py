@@ -61,8 +61,8 @@ class VerifiedEmailBackend(BaseBackend):
 
         try:
             email_instance = models.EmailAddress.objects.get(
-                is_verified=True,
-                email=email)
+                is_verified=True, email=email
+            )
         except models.EmailAddress.DoesNotExist:
             return None
 

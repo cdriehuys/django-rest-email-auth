@@ -13,7 +13,7 @@ class EmailAddressManager(models.Manager):
         """
         Create a new email address.
         """
-        is_primary = kwargs.pop('is_primary', False)
+        is_primary = kwargs.pop("is_primary", False)
 
         with transaction.atomic():
             email = super(EmailAddressManager, self).create(*args, **kwargs)

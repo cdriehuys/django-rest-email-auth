@@ -33,7 +33,8 @@ class SerializerSaveView(generics.GenericAPIView):
             return Response(serializer.data)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     # We reset the docstring because it's used to generate DRF's docs,
     # and documentation on the 'post' method has a higher specificity
     # than a class-level docstring.
-    post.__doc__ = ''
+    post.__doc__ = ""

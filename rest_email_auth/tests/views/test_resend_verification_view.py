@@ -6,7 +6,7 @@ from rest_framework.reverse import reverse
 from rest_email_auth import serializers
 
 
-url = reverse('rest-email-auth:resend-verification')
+url = reverse("rest-email-auth:resend-verification")
 
 
 @pytest.mark.django_db
@@ -16,7 +16,7 @@ def test_post_resend_verification(api_client):
     Sending a POST request to the endpoint should send a confirmation
     email to the provided address.
     """
-    data = {'email': 'test@example.com'}
+    data = {"email": "test@example.com"}
 
     response = api_client.post(url, data)
 

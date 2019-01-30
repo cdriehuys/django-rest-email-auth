@@ -8,6 +8,7 @@ class Command(management.BaseCommand):
     """
     Command to clean up old email confirmations.
     """
+
     help = "Clean up expired email confirmations."
 
     def handle(self, *args, **kwargs):
@@ -19,7 +20,8 @@ class Command(management.BaseCommand):
         cutoff -= app_settings.CONFIRMATION_SAVE_PERIOD
 
         queryset = models.EmailConfirmation.objects.filter(
-            created_at__lte=cutoff)
+            created_at__lte=cutoff
+        )
 
         count = queryset.count()
 
@@ -28,7 +30,10 @@ class Command(management.BaseCommand):
         if count:
             self.stdout.write(
                 self.style.SUCCESS(
-                    'Removed {count} old email confirmation(s)'.format(
-                        count=count)))
+                    "Removed {count} old email confirmation(s)".format(
+                        count=count
+                    )
+                )
+            )
         else:
-            self.stdout.write('No email confirmations to remove.')
+            self.stdout.write("No email confirmations to remove.")

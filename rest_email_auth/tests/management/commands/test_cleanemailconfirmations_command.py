@@ -14,17 +14,17 @@ def test_clean_expired(email_confirmation_factory, settings):
     a specified time older than their expiration date.
     """
     settings.REST_EMAIL_AUTH = {
-        'CONFIRMATION_EXPIRATION': datetime.timedelta(seconds=0),
-        'CONFIRMATION_SAVE_PERIOD': datetime.timedelta(seconds=0),
+        "CONFIRMATION_EXPIRATION": datetime.timedelta(seconds=0),
+        "CONFIRMATION_SAVE_PERIOD": datetime.timedelta(seconds=0),
     }
 
     email_confirmation_factory()
 
     out = StringIO()
-    management.call_command('cleanemailconfirmations', stdout=out)
+    management.call_command("cleanemailconfirmations", stdout=out)
 
     assert models.EmailConfirmation.objects.count() == 0
-    assert 'Removed 1' in out.getvalue()
+    assert "Removed 1" in out.getvalue()
 
 
 def test_clean_just_expired(email_confirmation_factory, settings):
@@ -32,12 +32,12 @@ def test_clean_just_expired(email_confirmation_factory, settings):
     Email confirmations that have just expired should not be removed.
     """
     settings.REST_EMAIL_AUTH = {
-        'CONFIRMATION_EXPIRATION': datetime.timedelta(seconds=0),
+        "CONFIRMATION_EXPIRATION": datetime.timedelta(seconds=0)
     }
 
     email_confirmation_factory()
 
-    management.call_command('cleanemailconfirmations')
+    management.call_command("cleanemailconfirmations")
 
     assert models.EmailConfirmation.objects.count() == 1
 
@@ -49,6 +49,6 @@ def test_clean_none():
     displayed indicating that nothing happened.
     """
     out = StringIO()
-    management.call_command('cleanemailconfirmations', stdout=out)
+    management.call_command("cleanemailconfirmations", stdout=out)
 
-    assert 'No email confirmations to remove' in out.getvalue()
+    assert "No email confirmations to remove" in out.getvalue()

@@ -14,7 +14,8 @@ class EmailConfirmationFactory(factory.django.DjangoModelFactory):
     """
     Factory for generating email confirmations.
     """
-    email = factory.SubFactory('rest_email_auth.factories.EmailFactory')
+
+    email = factory.SubFactory("rest_email_auth.factories.EmailFactory")
 
     class Meta(object):
         model = models.EmailConfirmation
@@ -24,8 +25,9 @@ class EmailFactory(factory.django.DjangoModelFactory):
     """
     Factory for generating email addresses.
     """
-    email = factory.sequence(lambda n: 'test{n}@example.com'.format(n=n))
-    user = factory.SubFactory('rest_email_auth.factories.UserFactory')
+
+    email = factory.sequence(lambda n: "test{n}@example.com".format(n=n))
+    user = factory.SubFactory("rest_email_auth.factories.UserFactory")
 
     class Meta(object):
         model = models.EmailAddress
@@ -35,18 +37,20 @@ class PasswordResetTokenFactory(factory.django.DjangoModelFactory):
     """
     Factory for generating password reset tokens.
     """
-    email = factory.SubFactory('rest_email_auth.factories.EmailFactory')
+
+    email = factory.SubFactory("rest_email_auth.factories.EmailFactory")
 
     class Meta(object):
-        model = 'rest_email_auth.PasswordResetToken'
+        model = "rest_email_auth.PasswordResetToken"
 
 
 class UserFactory(factory.django.DjangoModelFactory):
     """
     Factory for generating Django user instances.
     """
-    password = 'password'
-    username = factory.sequence(lambda n: 'user{n}'.format(n=n))
+
+    password = "password"
+    username = factory.sequence(lambda n: "user{n}".format(n=n))
 
     class Meta(object):
         model = get_user_model()

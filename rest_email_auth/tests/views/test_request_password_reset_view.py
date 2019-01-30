@@ -7,21 +7,20 @@ from rest_framework import status
 from rest_framework.reverse import reverse
 
 
-url = reverse('rest-email-auth:password-reset-request')
+url = reverse("rest-email-auth:password-reset-request")
 
 
 @mock.patch(
-    'rest_email_auth.views.serializers.PasswordResetRequestSerializer.save',
-    autospec=True)
+    "rest_email_auth.views.serializers.PasswordResetRequestSerializer.save",
+    autospec=True,
+)
 def test_request_reset(mock_save, api_client, email_factory):
     """
     Sending a POST request with valid data to the view should create a
     new password reset request.
     """
     email = email_factory(is_verified=True)
-    data = {
-        'email': email.email,
-    }
+    data = {"email": email.email}
 
     response = api_client.post(url, data)
 

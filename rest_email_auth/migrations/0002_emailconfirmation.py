@@ -9,22 +9,50 @@ import rest_email_auth.models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('rest_email_auth', '0001_initial'),
-    ]
+    dependencies = [("rest_email_auth", "0001_initial")]
 
     operations = [
         migrations.CreateModel(
-            name='EmailConfirmation',
+            name="EmailConfirmation",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='created at')),
-                ('key', models.CharField(default=rest_email_auth.models.generate_token, editable=False, max_length=255, verbose_name='confirmation key')),
-                ('email', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='confirmations', related_query_name='confirmation', to='rest_email_auth.EmailAddress', verbose_name='email')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="created at"
+                    ),
+                ),
+                (
+                    "key",
+                    models.CharField(
+                        default=rest_email_auth.models.generate_token,
+                        editable=False,
+                        max_length=255,
+                        verbose_name="confirmation key",
+                    ),
+                ),
+                (
+                    "email",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="confirmations",
+                        related_query_name="confirmation",
+                        to="rest_email_auth.EmailAddress",
+                        verbose_name="email",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'email confirmation',
-                'verbose_name_plural': 'email confirmations',
+                "verbose_name": "email confirmation",
+                "verbose_name_plural": "email confirmations",
             },
-        ),
+        )
     ]

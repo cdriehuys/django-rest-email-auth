@@ -14,8 +14,9 @@ registration_view = views.RegistrationView.as_view()
 
 
 @mock.patch(
-    'rest_email_auth.views.app_settings.__class__.REGISTRATION_SERIALIZER',
-    new_callable=mock.PropertyMock)
+    "rest_email_auth.views.app_settings.__class__.REGISTRATION_SERIALIZER",
+    new_callable=mock.PropertyMock,
+)
 def test_get_serializer_class(mock_registration_serializer):
     """
     The view should use the serializer defined in the app's settings.
@@ -33,15 +34,15 @@ def test_register(api_rf):
     new user.
     """
     data = {
-        'email': 'test@example.com',
-        'password': 'password',
-        'username': 'user',
+        "email": "test@example.com",
+        "password": "password",
+        "username": "user",
     }
 
     serializer = app_settings.REGISTRATION_SERIALIZER(data=data)
     assert serializer.is_valid()
 
-    request = api_rf.post('/', data)
+    request = api_rf.post("/", data)
     response = registration_view(request)
 
     assert response.status_code == status.HTTP_201_CREATED

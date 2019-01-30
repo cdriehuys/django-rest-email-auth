@@ -28,6 +28,7 @@ class EmailDetailView(generics.RetrieveUpdateDestroyAPIView):
     Only a verified emaili address may be marked as the user's primary
     email.
     """
+
     permission_classes = (IsAuthenticated,)
     serializer_class = serializers.EmailSerializer
 
@@ -51,6 +52,7 @@ class EmailListView(generics.ListCreateAPIView):
     post:
     Add a new email address to the requesting user's account.
     """
+
     permission_classes = (IsAuthenticated,)
     serializer_class = serializers.EmailSerializer
 
@@ -83,6 +85,7 @@ class EmailVerificationView(SerializerSaveView):
     """
     Verify a user's email address.
     """
+
     serializer_class = serializers.EmailVerificationSerializer
 
 
@@ -97,6 +100,7 @@ class PasswordResetRequestView(SerializerSaveView):
     * The operation will appear successful even if no reset email is
       sent. This is done to avoid leaking email addresses.
     """
+
     serializer_class = serializers.PasswordResetRequestSerializer
 
 
@@ -105,6 +109,7 @@ class PasswordResetView(SerializerSaveView):
     post:
     Reset the user's password using the token that was emailed to them.
     """
+
     serializer_class = serializers.PasswordResetSerializer
 
 
@@ -124,4 +129,5 @@ class ResendVerificationView(SerializerSaveView):
     """
     Resend an email verification to a specific address.
     """
+
     serializer_class = serializers.ResendVerificationSerializer

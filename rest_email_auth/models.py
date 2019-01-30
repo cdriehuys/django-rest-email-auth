@@ -31,36 +31,42 @@ class EmailAddress(models.Model):
     """
     A user's email address.
     """
+
     created_at = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name=_('created at'))
+        auto_now_add=True, verbose_name=_("created at")
+    )
     email = models.EmailField(
-        max_length=255,
-        unique=True,
-        verbose_name=_('email'))
+        max_length=255, unique=True, verbose_name=_("email")
+    )
     is_primary = models.BooleanField(
         default=False,
-        help_text=_("Boolean indicating if the email is the user's primary "
-                    "address."),
-        verbose_name=_('is primary'))
+        help_text=_(
+            "Boolean indicating if the email is the user's primary " "address."
+        ),
+        verbose_name=_("is primary"),
+    )
     is_verified = models.BooleanField(
         default=False,
-        help_text=_('Boolean indicating if the user has verified ownership of '
-                    'the email address.'),
-        verbose_name=_('is verified'))
+        help_text=_(
+            "Boolean indicating if the user has verified ownership of "
+            "the email address."
+        ),
+        verbose_name=_("is verified"),
+    )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name='email_addresses',
-        related_query_name='email_address',
-        verbose_name=_('user'))
+        related_name="email_addresses",
+        related_query_name="email_address",
+        verbose_name=_("user"),
+    )
 
     # Use custom manager
     objects = managers.EmailAddressManager()
 
     class Meta(object):
-        verbose_name = _('email address')
-        verbose_name_plural = _('email addresses')
+        verbose_name = _("email address")
+        verbose_name_plural = _("email addresses")
 
     def __str__(self):
         """
@@ -87,11 +93,11 @@ class EmailAddress(models.Model):
         email_utils.send_email(
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[self.email],
-            subject=_('Registration Attempt'),
-            template_name='rest_email_auth/emails/duplicate-email',
+            subject=_("Registration Attempt"),
+            template_name="rest_email_auth/emails/duplicate-email",
         )
 
-        logger.info('Sent duplicate email notification to: %s', self.email)
+        logger.info("Sent duplicate email notification to: %s", self.email)
 
     def set_primary(self):
         """
@@ -109,33 +115,37 @@ class EmailAddress(models.Model):
             self.save()
 
         logger.info(
-            'Set %s as the primary email address for %s.',
+            "Set %s as the primary email address for %s.",
             self.email,
-            self.user)
+            self.user,
+        )
 
 
 class EmailConfirmation(models.Model):
     """
     Model to store a token used to verify an email address.
     """
+
     created_at = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name=_('created at'))
+        auto_now_add=True, verbose_name=_("created at")
+    )
     email = models.ForeignKey(
-        'rest_email_auth.EmailAddress',
+        "rest_email_auth.EmailAddress",
         on_delete=models.CASCADE,
-        related_name='confirmations',
-        related_query_name='confirmation',
-        verbose_name=_('email'))
+        related_name="confirmations",
+        related_query_name="confirmation",
+        verbose_name=_("email"),
+    )
     key = models.CharField(
         default=generate_token,
         editable=False,
         max_length=255,
-        verbose_name=_('confirmation key'))
+        verbose_name=_("confirmation key"),
+    )
 
     class Meta(object):
-        verbose_name = _('email confirmation')
-        verbose_name_plural = _('email confirmations')
+        verbose_name = _("email confirmation")
+        verbose_name_plural = _("email confirmations")
 
     def confirm(self):
         """
@@ -146,7 +156,7 @@ class EmailConfirmation(models.Model):
 
         signals.email_verified.send(email=self.email, sender=self.__class__)
 
-        logger.info('Verified email address: %s', self.email.email)
+        logger.info("Verified email address: %s", self.email.email)
 
     @property
     def is_expired(self):
@@ -167,20 +177,21 @@ class EmailConfirmation(models.Model):
         Send a verification email to the user.
         """
         context = {
-            'verification_url': app_settings.EMAIL_VERIFICATION_URL.format(
-                key=self.key),
+            "verification_url": app_settings.EMAIL_VERIFICATION_URL.format(
+                key=self.key
+            )
         }
 
         email_utils.send_email(
             context=context,
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[self.email.email],
-            subject=_('Please Verify Your Email Address'),
-            template_name='rest_email_auth/emails/verify-email',
+            subject=_("Please Verify Your Email Address"),
+            template_name="rest_email_auth/emails/verify-email",
         )
 
         logger.info(
-            'Sent confirmation email to %s for user #%d',
+            "Sent confirmation email to %s for user #%d",
             self.email.email,
             self.email.user.id,
         )
@@ -190,24 +201,29 @@ class PasswordResetToken(models.Model):
     """
     Store a token that can be used to reset a user's password.
     """
+
     created_at = models.DateTimeField(
         auto_now_add=True,
-        help_text=_('The time at which the password reset token was created.'),
-        verbose_name=_('created at'))
+        help_text=_("The time at which the password reset token was created."),
+        verbose_name=_("created at"),
+    )
     email = models.ForeignKey(
-        'rest_email_auth.EmailAddress',
+        "rest_email_auth.EmailAddress",
         editable=False,
         help_text=_("The email address used to request the password reset."),
         on_delete=models.CASCADE,
-        related_name='password_reset_tokens',
-        related_query_name='password_reset_token',
-        verbose_name=_('email address'))
+        related_name="password_reset_tokens",
+        related_query_name="password_reset_token",
+        verbose_name=_("email address"),
+    )
     key = models.UUIDField(
         default=uuid.uuid4,
         editable=False,
-        help_text=_("The token that authorizes the user to reset their "
-                    "password."),
-        verbose_name=_('key'))
+        help_text=_(
+            "The token that authorizes the user to reset their " "password."
+        ),
+        verbose_name=_("key"),
+    )
 
     # Custom managers. We have to explicitly define the default manager
     # so that it doesn't get overwritten.
@@ -215,8 +231,8 @@ class PasswordResetToken(models.Model):
     valid_tokens = managers.ValidPasswordResetTokenManager()
 
     class Meta:
-        verbose_name = _('password reset token')
-        verbose_name_plural = _('password reset tokens')
+        verbose_name = _("password reset token")
+        verbose_name_plural = _("password reset tokens")
 
     def __str__(self):
         """
@@ -232,16 +248,15 @@ class PasswordResetToken(models.Model):
         Send the password reset token to the user.
         """
         context = {
-            'reset_url': app_settings.PASSWORD_RESET_URL.format(
-                key=self.key),
+            "reset_url": app_settings.PASSWORD_RESET_URL.format(key=self.key)
         }
 
         email_utils.send_email(
             context=context,
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[self.email.email],
-            subject=_('Reset Your Password'),
-            template_name='rest_email_auth/emails/reset-password',
+            subject=_("Reset Your Password"),
+            template_name="rest_email_auth/emails/reset-password",
         )
 
-        logger.info('Sent password reset email to %s', self.email)
+        logger.info("Sent password reset email to %s", self.email)

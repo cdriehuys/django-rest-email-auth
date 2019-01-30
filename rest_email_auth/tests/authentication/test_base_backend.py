@@ -1,5 +1,3 @@
-
-
 def test_get_user(base_auth_backend, user_factory):
     """
     Passing in a user's ID should return the user with that ID.

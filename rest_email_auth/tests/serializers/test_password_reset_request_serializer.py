@@ -7,17 +7,15 @@ from rest_email_auth import models, serializers
 
 
 @mock.patch(
-    'rest_email_auth.serializers.models.PasswordResetToken.send',
-    autospec=True)
+    "rest_email_auth.serializers.models.PasswordResetToken.send", autospec=True
+)
 def test_save(mock_send_reset, email_factory):
     """
     Saving a serializer with valid data should send out a password reset
     email.
     """
     email = email_factory(is_verified=True)
-    data = {
-        'email': email.email,
-    }
+    data = {"email": email.email}
 
     serializer = serializers.PasswordResetRequestSerializer(data=data)
     assert serializer.is_valid()
@@ -36,9 +34,7 @@ def test_save_nonexistent_email(db):
     If a non-existent email address is provided to the reset endpoint,
     no action should be taken.
     """
-    data = {
-        'email': 'fake@example.com',
-    }
+    data = {"email": "fake@example.com"}
 
     serializer = serializers.PasswordResetRequestSerializer(data=data)
     assert serializer.is_valid()
@@ -55,9 +51,7 @@ def test_save_unverified_email(email_factory):
     should be taken.
     """
     email = email_factory(is_verified=False)
-    data = {
-        'email': email.email,
-    }
+    data = {"email": email.email}
 
     serializer = serializers.PasswordResetRequestSerializer(data=data)
     assert serializer.is_valid()
