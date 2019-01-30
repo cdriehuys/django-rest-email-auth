@@ -8,6 +8,9 @@ v2.0.0
 Breaking Changes
   * Dropped support for Python versions less than 3.6 and added support for Python 3.7.
 
+Miscellaneous
+  * :issue:`61`: Format code with ``black``.
+
 
 v1.2.0
 ------
