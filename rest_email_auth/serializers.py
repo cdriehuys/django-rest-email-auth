@@ -11,8 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import serializers
 
-from rest_email_auth import models, signals
-
+from rest_email_auth import models, signals, app_settings
 
 logger = logging.getLogger(__name__)
 
@@ -151,6 +150,18 @@ class EmailVerificationSerializer(serializers.Serializer):
         style={"input_type": "password"}, write_only=True
     )
 
+    def __init__(self, *args, **kwargs):
+        """
+        Conditionally remove the password field based on if a password
+        is required to verify an email address.
+        """
+        super().__init__(*args, **kwargs)
+
+        self._confirmation = None
+
+        if not app_settings.EMAIL_VERIFICATION_PASSWORD_REQUIRED:
+            self.fields.pop("password")
+
     def save(self):
         """
         Confirm the email address matching the confirmation key.
@@ -172,7 +183,10 @@ class EmailVerificationSerializer(serializers.Serializer):
         """
         user = self._confirmation.email.user
 
-        if not user.check_password(data["password"]):
+        if (
+            app_settings.EMAIL_VERIFICATION_PASSWORD_REQUIRED
+            and not user.check_password(data["password"])
+        ):
             raise serializers.ValidationError(
                 _("The provided password is invalid.")
             )

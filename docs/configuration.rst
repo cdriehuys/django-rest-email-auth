@@ -49,6 +49,20 @@ The duration of the grace period after a confirmation expires before it will be
 deleted by the ``cleanemailconfirmations`` command. See :ref:`clean-email-confirmations` for more information.
 
 
+.. _email-verification-password-required:
+
+``EMAIL_VERIFICATION_PASSWORD_REQUIRED``
+----------------------------------------
+
+Default: ``True``
+
+A boolean indicating if users must provide their password when verifying an email address. Enabling this setting provides slightly more security at the cost of a decreased user experience.
+
+.. note::
+
+    This setting was added in v2.0.0. To maintain backwards compatibility, it is enabled by default.
+
+
 .. _config-registration-serializer:
 
 ``REGISTRATION_SERIALIZER``

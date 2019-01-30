@@ -51,7 +51,7 @@ email address.
 .. http:post:: /verify-email/
 
     :<json string key: The verification key the user received.
-    :<json string password: The user's password.
+    :<json string password: The user's password. This field is only required if :ref:`email-verification-password-required` is set to ``True``.
 
     :>json string email: The email address that was verified.
 

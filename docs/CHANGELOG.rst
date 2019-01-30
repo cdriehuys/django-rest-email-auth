@@ -8,6 +8,9 @@ v2.0.0
 Breaking Changes
   * Dropped support for Python versions less than 3.6 and added support for Python 3.7.
 
+Features
+  * :issue:`59`: Add setting to determine if users must provide their password when verifying an email address. To maintain backwards compatibility, the setting defaults to ``True``.
+
 Miscellaneous
   * :issue:`61`: Format code with ``black``.
 
@@ -15,7 +18,7 @@ Miscellaneous
 v1.2.0
 ------
 
-Features:
+Features
   * Use ``django-email-utils`` for email sending. This allows us to easily send both HTML and plain text templated emails.
 
 

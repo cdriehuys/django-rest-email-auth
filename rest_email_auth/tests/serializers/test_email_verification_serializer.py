@@ -85,3 +85,32 @@ def test_validate_invalid_password(
 
     assert not serializer.is_valid()
     assert set(serializer.errors.keys()) == {"non_field_errors"}
+
+
+def test_validate_no_password(
+    app_settings, email_confirmation_factory, email_factory, user_factory
+):
+    """
+    If the password requirement for verifying email addresses is
+    disabled then users should be able to verify email addresses without
+    providing their password.
+    """
+    app_settings.EMAIL_VERIFICATION_PASSWORD_REQUIRED = False
+
+    user = user_factory()
+    email = email_factory(user=user)
+    confirmation = email_confirmation_factory(email=email)
+
+    data = {"key": confirmation.key}
+
+    serializer = serializers.EmailVerificationSerializer(data=data)
+    assert serializer.is_valid()
+
+    serializer.save()
+    email.refresh_from_db()
+
+    expected = {"email": email.email}
+
+    assert serializer.data == expected
+    assert email.is_verified
+    assert email.confirmations.count() == 0

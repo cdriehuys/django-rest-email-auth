@@ -68,6 +68,14 @@ class AppSettings(object):
         )
 
     @property
+    def EMAIL_VERIFICATION_PASSWORD_REQUIRED(self):
+        """
+        A boolean indicating if the user's password is required to
+        verify their email address.
+        """
+        return self._setting("EMAIL_VERIFICATION_PASSWORD_REQUIRED", True)
+
+    @property
     def EMAIL_VERIFICATION_URL(self):
         """
         The template to use for the email verification url.
