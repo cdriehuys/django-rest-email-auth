@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+v2.0.0
+------
+
+Breaking Changes
+  * Dropped support for Python versions less than 3.6 and added support for Python 3.7.
+
+
 v1.2.0
 ------
 
