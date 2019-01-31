@@ -18,6 +18,9 @@ Breaking Changes
 Features
   * :issue:`59`: Add setting to determine if users must provide their password when verifying an email address. To maintain backwards compatibility, the setting defaults to ``True``.
 
+Documentation
+  * :issue:`64`: Add contributing guidelines.
+
 Miscellaneous
   * :issue:`61`: Format code with ``black``.
 

@@ -17,6 +17,7 @@
    commands
    custom-serializers
    advanced-usage
+   CONTRIBUTING
    CHANGELOG
 
 
