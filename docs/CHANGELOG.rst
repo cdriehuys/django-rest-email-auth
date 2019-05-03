@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+v2.0.2
+------
+
+Bugfixes
+  * :issue:`70`: The email address a user registers with is now correctly
+    marked as their primary email address.
+
+
 v2.0.1
 ------
 

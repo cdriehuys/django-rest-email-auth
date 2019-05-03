@@ -37,6 +37,7 @@ def test_create_new_user(registration_listener):
     email = user.email_addresses.get()
 
     assert email.email == data["email"]
+    assert email.is_primary
 
     # Make sure we sent out an email confirmation
     assert mock_send_confirmation.call_count == 1

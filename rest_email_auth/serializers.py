@@ -386,7 +386,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
             user.save()
 
             email_instance = models.EmailAddress.objects.create(
-                email=email, user=user
+                email=email, is_primary=True, user=user
             )
             email_instance.send_confirmation()
 
