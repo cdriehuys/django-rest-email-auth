@@ -94,7 +94,7 @@ class EmailAddress(models.Model):
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[self.email],
             subject=_("Registration Attempt"),
-            template_name="rest_email_auth/emails/duplicate-email",
+            template_name=app_settings.PATH_TO_DUPLICATE_EMAIL_TEMPLATE,
         )
 
         logger.info("Sent duplicate email notification to: %s", self.email)
@@ -187,7 +187,7 @@ class EmailConfirmation(models.Model):
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[self.email.email],
             subject=_("Please Verify Your Email Address"),
-            template_name="rest_email_auth/emails/verify-email",
+            template_name=app_settings.PATH_TO_VERIFY_EMAIL_TEMPLATE,
         )
 
         logger.info(
@@ -256,7 +256,7 @@ class PasswordResetToken(models.Model):
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[self.email.email],
             subject=_("Reset Your Password"),
-            template_name="rest_email_auth/emails/reset-password",
+            template_name=app_settings.PATH_TO_RESET_EMAIL_TEMPLATE,
         )
 
         logger.info("Sent password reset email to %s", self.email)
