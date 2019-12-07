@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+v2.0.3
+------
+
+Bugfixes
+* :issue:`77`: Fix dependency issues for older versions of Django.
+
+
 v2.0.2
 ------
 
