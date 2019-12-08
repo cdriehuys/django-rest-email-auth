@@ -71,3 +71,32 @@ A boolean indicating if users must provide their password when verifying an emai
 Default: ``'rest_email_auth.serializers.RegistrationSerializer'``
 
 The path to the serializer class that will be used for the registration endpoint. See :ref:`custom-serializers-registration` for more information.
+
+.. _confirmation-save-period:
+
+``PATH_TO_RESET_EMAIL_TEMPLATE``
+---------------------------
+
+Default: ``rest_email_auth/emails/reset-password``
+
+The path to the template for the reset password email.
+
+.. _reset-email-template:
+
+``PATH_TO_VERIFY_EMAIL_TEMPLATE``
+---------------------------
+
+Default: ``rest_email_auth/emails/verify-email``
+
+The path to the template for the verify user email.
+
+.. _verify-email-template:
+
+``PATH_TO_DUPLICATE_EMAIL_TEMPLATE``
+---------------------------
+
+Default: ``rest_email_auth/emails/duplicate-email``
+
+The path to the template for the email that notifies of a duplicate email.
+
+.. _duplicate-email-template:

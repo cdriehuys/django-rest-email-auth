@@ -116,6 +116,45 @@ class AppSettings(object):
             )
         )
 
+    @property
+    def PATH_TO_RESET_EMAIL_TEMPLATE(self):
+        """
+        The path to the email template used for
+        resetting a password.
+        Defaults to the default template.
+        """
+
+        return self._setting(
+            "PATH_TO_RESET_EMAIL_TEMPLATE",
+            "rest_email_auth/emails/reset-password",
+        )
+
+    @property
+    def PATH_TO_VERIFY_EMAIL_TEMPLATE(self):
+        """
+        The path to the email template used for
+        verifying an email.
+        Defaults to the default template.
+        """
+
+        return self._setting(
+            "PATH_TO_VERIFY_EMAIL_TEMPLATE",
+            "rest_email_auth/emails/verify-email",
+        )
+
+    @property
+    def PATH_TO_DUPLICATE_EMAIL_TEMPLATE(self):
+        """
+        The path to the email template used for
+        notifying about a duplicate signup.
+        Defaults to the default template.
+        """
+
+        return self._setting(
+            "PATH_TO_DUPLICATE_EMAIL_TEMPLATE",
+            "rest_email_auth/emails/duplicate-email",
+        )
+
 
 # Ugly? Guido recommends this himself ...
 # http://mail.python.org/pipermail/python-ideas/2012-May/014969.html
