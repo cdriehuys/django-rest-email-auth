@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+v2.1.0
+------
+
+Features
+  * :issue:`71`: Make email template paths configurable.
+
+
 v2.0.3
 ------
 
