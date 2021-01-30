@@ -2,7 +2,7 @@
 django-rest-email-auth
 ######################
 
-.. image:: https://img.shields.io/travis/cdriehuys/django-rest-email-auth.svg
+.. image:: https://img.shields.io/github/workflow/status/cdriehuys/django-rest-email-auth/Review%20Build/master
     :target: https://travis-ci.org/cdriehuys/django-rest-email-auth
 
 .. image:: https://img.shields.io/codecov/c/github/cdriehuys/django-rest-email-auth.svg
