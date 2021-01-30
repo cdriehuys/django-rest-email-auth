@@ -1,6 +1,12 @@
 Changelog
 =========
 
+v3.0.1
+------
+
+Miscellaneous
+  * Fix automated release process.
+
 v3.0.0
 ------
 
