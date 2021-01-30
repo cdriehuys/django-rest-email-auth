@@ -1,6 +1,16 @@
 Changelog
 =========
 
+In Development
+--------------
+
+Breaking Changes
+  * Dropped support for Django versions before 2.2.
+  * Dropped support for Django Rest Framework versions before 3.10.
+
+Features
+  * :issue:`82`: Added support for Django versions up to 3.1.
+
 
 v2.1.0
 ------
@@ -13,7 +23,7 @@ v2.0.3
 ------
 
 Bugfixes
-* :issue:`77`: Fix dependency issues for older versions of Django.
+  * :issue:`77`: Fix dependency issues for older versions of Django.
 
 
 v2.0.2

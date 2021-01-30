@@ -13,7 +13,7 @@ setup(
     description="Django app for email based authentication and registration.",
     long_description=get_description(),
     author="Chathan Driehuys",
-    author_email="cdriehuys@gmail.com",
+    author_email="chathan@driehuys.com",
     url="https://github.com/cdriehuys/django-rest-email-auth",
     license="MIT",
     # Additional classifiers for PyPI
@@ -21,9 +21,9 @@ setup(
         "Development Status :: 5 - Production/Stable",
         # Supported versions of Django
         "Framework :: Django",
-        "Framework :: Django :: 1.11",
-        "Framework :: Django :: 2.0",
-        "Framework :: Django :: 2.1",
+        "Framework :: Django :: 2.2",
+        "Framework :: Django :: 3.0",
+        "Framework :: Django :: 3.1",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
@@ -38,8 +38,9 @@ setup(
     packages=find_packages(),
     # Dependencies
     install_requires=[
-        "Django >= 1.10",
-        "django-email-utils < 1.0",
-        "djangorestframework >= 3.0, < 3.12",
+        "Django >= 2.2, < 3.2",
+        "django-email-utils >= 1.0, < 2.0",
+        # DRF 3.10 is the first to support our minimum Django version of 2.2.
+        "djangorestframework >= 3.10",
     ],
 )
