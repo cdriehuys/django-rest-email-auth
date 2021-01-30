@@ -1,6 +1,12 @@
 Changelog
 =========
 
+v3.0.3
+------
+
+Miscellaneous
+  * Fix missing dependency during automated deployment.
+
 v3.0.2
 ------
 
