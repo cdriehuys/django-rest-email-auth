@@ -40,6 +40,6 @@ setup(
     install_requires=[
         "Django >= 1.10",
         "django-email-utils < 1.0",
-        "djangorestframework >= 3.0",
+        "djangorestframework >= 3.0, < 3.12",
     ],
 )
