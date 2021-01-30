@@ -1,7 +1,7 @@
 import datetime
+from io import StringIO
 
 from django.core import management
-from django.utils.six import StringIO
 
 import pytest
 

@@ -3,7 +3,7 @@ django-rest-email-auth
 ######################
 
 .. image:: https://img.shields.io/github/workflow/status/cdriehuys/django-rest-email-auth/Review%20Build/master
-    :target: https://travis-ci.org/cdriehuys/django-rest-email-auth
+    :target: https://github.com/cdriehuys/django-rest-email-auth/actions?query=workflow%3A%22Review+Build%22+branch%3Amaster
 
 .. image:: https://img.shields.io/codecov/c/github/cdriehuys/django-rest-email-auth.svg
     :target: https://codecov.io/gh/cdriehuys/django-rest-email-auth
@@ -32,6 +32,14 @@ Features:
   * Authentication using any of a user's verified email addresses
   * Registration of new users
   * Password resets using verified emails
+
+*************
+Compatibility
+*************
+
+| **Python:** 3.6 or later
+| **Django:** Versions 2.2 through 3.1
+| **Django REST Framework:** 3.10 or later
 
 ***************
 Adding Features

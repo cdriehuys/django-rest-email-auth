@@ -6,8 +6,9 @@ Installation
 Requirements
 ============
 
-  * Python 3.6 or 3.7
-  * Django 1.11, 2.0, or 2.1. Other versions may work, but they are not officially supported.
+* Python >= 3.6
+* Django >= 2.2 and <= 3.1. Other versions may work, but they are not
+  officially supported.
 
 
 Getting the Package
@@ -54,17 +55,21 @@ In :file:`settings.py`, make sure the following settings are present::
         'PASSWORD_RESET_URL': 'https://example.com/reset/{key}',
     }
 
+See :ref:`configuration-page` for a full list of settings.
 
 Email Setup
 -----------
 
-In addition to the above settings, we also require that Django be configured to send emails. Please configure any of the ``EMAIL_*`` settings that apply to your setup. See Django's `email settings`_ for more information.
+In addition to the above settings, we also require that Django be configured to
+send emails. Please configure any of the ``EMAIL_*`` settings that apply to your
+setup. See Django's `email settings`_ for more information.
 
 
 URLs
 ----
 
-After the settings have been configured, include the app's URLs in :file:`urls.py`::
+After the settings have been configured, include the app's URLs in
+:file:`urls.py`::
 
     from django.urls import include, path
     # If you're using Django 1.11:
