@@ -1,8 +1,8 @@
 Changelog
 =========
 
-In Development
---------------
+v3.0.0
+------
 
 Breaking Changes
   * Dropped support for Django versions before 2.2.
