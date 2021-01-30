@@ -1,6 +1,12 @@
 Changelog
 =========
 
+v3.0.2
+------
+
+Miscellaneous
+  * Fix broken reference in deployment action.
+
 v3.0.1
 ------
 
