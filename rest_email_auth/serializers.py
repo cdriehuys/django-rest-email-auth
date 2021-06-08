@@ -283,9 +283,9 @@ class PasswordResetSerializer(serializers.Serializer):
         """
         Reset the user's password if the provided information is valid.
         """
-        token = models.PasswordResetToken.objects.get(
-            key=self.validated_data["key"]
-        )
+        token = models.PasswordResetToken.objects.select_related(
+            "email__user"
+        ).get(key=self.validated_data["key"])
 
         token.email.user.set_password(self.validated_data["password"])
         token.email.user.save()
