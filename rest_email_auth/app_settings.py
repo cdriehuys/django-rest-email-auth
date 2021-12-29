@@ -7,7 +7,7 @@ https://github.com/pennersr/django-allauth/blob/master/allauth/account/app_setti
 
 import sys
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 class AppSettings(object):
