@@ -7,6 +7,8 @@ https://github.com/pennersr/django-allauth/blob/master/allauth/account/app_setti
 
 import sys
 
+from django.utils.translation import ugettext_lazy as _
+
 
 class AppSettings(object):
     def __init__(self):
@@ -65,6 +67,25 @@ class AppSettings(object):
 
         return self._setting(
             "CONFIRMATION_SAVE_PERIOD", datetime.timedelta(days=7)
+        )
+
+    @property
+    def EMAIL_SUBJECT_DUPLICATE(self):
+        """
+        The subject to use for emails notifying users of a duplicate
+        registration attempt.
+        """
+        return self._setting(
+            "EMAIL_SUBJECT_DUPLICATE", _("Registration Attempt")
+        )
+
+    @property
+    def EMAIL_SUBJECT_VERIFICATION(self):
+        """
+        The subject to use for emails containing verification tokens.
+        """
+        return self._setting(
+            "EMAIL_SUBJECT_VERIFICATION", _("Please Verify Your Email Address")
         )
 
     @property
