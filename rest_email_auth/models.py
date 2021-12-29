@@ -93,7 +93,7 @@ class EmailAddress(models.Model):
         email_utils.send_email(
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[self.email],
-            subject=_("Registration Attempt"),
+            subject=app_settings.EMAIL_SUBJECT_DUPLICATE,
             template_name=app_settings.PATH_TO_DUPLICATE_EMAIL_TEMPLATE,
         )
 
@@ -186,7 +186,7 @@ class EmailConfirmation(models.Model):
             context=context,
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[self.email.email],
-            subject=_("Please Verify Your Email Address"),
+            subject=app_settings.EMAIL_SUBJECT_VERIFICATION,
             template_name=app_settings.PATH_TO_VERIFY_EMAIL_TEMPLATE,
         )
 

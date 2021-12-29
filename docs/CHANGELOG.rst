@@ -1,6 +1,12 @@
 Changelog
 =========
 
+In Development
+--------------
+
+Features
+  * :issue:`96`: Ability to customize email subjects.
+
 v3.0.3
 ------
 

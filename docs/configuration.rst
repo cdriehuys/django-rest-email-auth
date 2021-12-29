@@ -60,6 +60,23 @@ deleted by the ``cleanemailconfirmations`` command. See
 :ref:`clean-email-confirmations` for more information.
 
 
+``EMAIL_SUBJECT_DUPLICATE``
+---------------------------
+
+Default: ``Registration Attempt``
+
+The subject line to use for emails notifying users of a registration attempt
+for an email address that has already been registered.
+
+``EMAIL_SUBJECT_VERFICATION``
+-----------------------------
+
+Default: ``Please Verify Your Email Address``
+
+The subject line to use for emails containing a verification token for a
+particular address.
+
+
 .. _email-verification-password-required:
 
 ``EMAIL_VERIFICATION_PASSWORD_REQUIRED``
