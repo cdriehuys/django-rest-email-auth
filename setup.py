@@ -41,6 +41,6 @@ setup(
         "Django >= 3.2, <= 4.2",
         "django-email-utils >= 1.0, < 2.0",
         # DRF 3.10 is the first to support our minimum Django version of 2.2.
-        "djangorestframework >= 3.10",
+        "djangorestframework >= 3.14",
     ],
 )
