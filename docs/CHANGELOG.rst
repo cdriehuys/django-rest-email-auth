@@ -7,7 +7,7 @@ In Development
 Features
   * :issue:`96`: Ability to customize email subjects.
   * :issue:`97`: Added support for Django 4. We explicitly test against Django
-    2.2, 3.2, and 4.0, but all versions after 2.2 should work.
+    3.2, 4.0, and 4.1, but all versions after 3.2 should work.
 
 v3.0.3
 ------
