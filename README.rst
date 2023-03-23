@@ -38,7 +38,7 @@ Compatibility
 *************
 
 | **Python:** 3.6 or later
-| **Django:** Versions 2.2 through 4.0
+| **Django:** Versions 2.2 through 4.1
 | **Django REST Framework:** 3.10 or later
 
 ***************
