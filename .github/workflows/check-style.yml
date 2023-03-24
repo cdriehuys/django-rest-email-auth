@@ -1,0 +1,23 @@
+name: Check Style
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+    tags:
+      - v*
+
+jobs:
+  lint:
+    name: Lint
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: psf/black@stable
+
+      - name: flake8 Lint
+        uses: py-actions/flake8@v2

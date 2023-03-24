@@ -8,7 +8,6 @@ import uuid
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("rest_email_auth", "0004_emailaddress_is_primary")]
 
     operations = [

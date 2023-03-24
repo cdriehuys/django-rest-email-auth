@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("rest_email_auth", "0002_emailconfirmation")]
 
     operations = [

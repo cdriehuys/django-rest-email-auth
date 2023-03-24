@@ -17,7 +17,6 @@ def fix_primary_emails(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("rest_email_auth", "0005_passwordresettoken")]
 
     operations = [
