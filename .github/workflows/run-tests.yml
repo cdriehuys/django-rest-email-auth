@@ -53,7 +53,7 @@ jobs:
       - name: Test
         run: |
           poetry run ./example_project/manage.py check
-          poetry run coverage run -m pytest
+          poetry run pytest --cov=rest_email_auth
 
       - name: Upload coverage report
         uses: codecov/codecov-action@v3
