@@ -48,8 +48,8 @@ pytest-cov = "4.0.0"
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-sphinx = "3.4.3"
-sphinxcontrib-httpdomain = "1.7.0"
+myst-parser = "^1.0.0"
+sphinx = "^5"
 sphinx-autobuild = "2020.9.1"
 sphinx-issues = "1.2.0"
 sphinx-rtd-theme = "1.2.0"
