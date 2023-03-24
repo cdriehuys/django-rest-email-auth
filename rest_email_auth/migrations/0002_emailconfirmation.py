@@ -8,7 +8,6 @@ import rest_email_auth.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("rest_email_auth", "0001_initial")]
 
     operations = [
