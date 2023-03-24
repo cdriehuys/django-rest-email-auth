@@ -1,4 +1,4 @@
-from django.conf.urls import include, url
+from django.urls import include, path
 
 
-urlpatterns = [url(r"^", include("rest_email_auth.urls"))]
+urlpatterns = [path(r"", include("rest_email_auth.urls"))]
