@@ -15,3 +15,47 @@ exclude = '''
   | dist
 )/
 '''
+
+[tool.poetry]
+name = "django-rest-email-auth"
+version = "3.0.3"
+description = "Django app for email based authentication and registration via a REST API."
+authors = ["Chathan Driehuys <chathan@driehuys.com>"]
+license = "MIT"
+readme = "README.rst"
+packages = [{include = "rest_email_auth"}]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+Django = ">=3.2, <5"
+django-email-utils = "^1"
+djangorestframework = "^3.10"
+
+[tool.poetry.group.ci]
+optional = true
+
+[tool.poetry.group.ci.dependencies]
+# Required for example project's tests to pass
+coreapi = "2.3.3"
+coverage = "5.4"
+
+[tool.poetry.group.dev.dependencies]
+black = "23.1.0"
+factory_boy = "3.2.0"
+flake8 = "3.8.4"
+pytest = "6.2.2"
+pytest-django = "4.1.0"
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "3.4.3"
+sphinxcontrib-httpdomain = "1.7.0"
+sphinx-autobuild = "2020.9.1"
+sphinx-issues = "1.2.0"
+sphinx-rtd-theme = "1.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
