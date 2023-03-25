@@ -15,6 +15,6 @@ jobs:
     steps:
       - uses: google-github-actions/release-please-action@v3
         with:
-          changelog-path: ./docs/CHANGELOG.md
+          changelog-path: docs/CHANGELOG.md
           release-type: python
           package-name: django-rest-email-auth
