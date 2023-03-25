@@ -16,7 +16,7 @@ import os
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["myst_parser", "sphinxcontrib.httpdomain", "sphinx_issues"]
+extensions = ["myst_parser", "sphinxcontrib.httpdomain"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -59,10 +59,6 @@ pygments_style = "sphinx"
 # If true, `todo` and `todoList` produce output, else they produce
 # nothing.
 todo_include_todos = False
-
-
-# Configuration for 'sphinx-issues'
-issues_github_path = "cdriehuys/django-rest-email-auth"
 
 
 # -- Options for HTML output -------------------------------------------
