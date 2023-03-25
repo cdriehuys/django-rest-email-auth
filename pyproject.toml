@@ -50,9 +50,14 @@ optional = true
 [tool.poetry.group.docs.dependencies]
 myst-parser = "^1.0.0"
 sphinx = "^5"
-sphinx-autobuild = "2020.9.1"
-sphinx-issues = "1.2.0"
-sphinx-rtd-theme = "1.2.0"
+sphinx-rtd-theme = "^1.2.0"
+sphinxcontrib-httpdomain = "^1.8.1"
+
+[tool.poetry.group.docs-dev]
+optional = true
+
+[tool.poetry.group.docs-dev.dependencies]
+sphinx-autobuild = "^2020.9.1"
 
 [build-system]
 requires = ["poetry-core"]
