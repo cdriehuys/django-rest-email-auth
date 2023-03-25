@@ -2,8 +2,9 @@
 django-rest-email-auth
 ######################
 
-.. image:: https://img.shields.io/github/workflow/status/cdriehuys/django-rest-email-auth/Review%20Build/master
-    :target: https://github.com/cdriehuys/django-rest-email-auth/actions?query=workflow%3A%22Review+Build%22+branch%3Amaster
+.. image:: https://img.shields.io/github/actions/workflow/status/cdriehuys/django-rest-email-auth/run-tests.yml?branch=master
+   :alt: GitHub Workflow Status
+   :target: https://github.com/cdriehuys/django-rest-email-auth/actions/workflows/run-tests.yml?query=branch%3Amaster
 
 .. image:: https://img.shields.io/codecov/c/github/cdriehuys/django-rest-email-auth.svg
     :target: https://codecov.io/gh/cdriehuys/django-rest-email-auth
