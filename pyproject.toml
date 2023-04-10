@@ -40,7 +40,7 @@ coreapi = "2.3.3"
 
 [tool.poetry.group.dev.dependencies]
 factory_boy = "3.2.1"
-pytest = "7.2.2"
+pytest = "7.3.0"
 pytest-django = "4.5.2"
 pytest-cov = "4.0.0"
 
