@@ -886,17 +886,18 @@ test = ["cython", "html5lib", "pytest (>=4.6)", "typed_ast"]
 
 [[package]]
 name = "sphinx-autobuild"
-version = "2020.9.1"
+version = "2021.3.14"
 description = "Rebuild Sphinx documentation on changes, with live-reload in the browser."
 category = "dev"
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "sphinx-autobuild-2020.9.1.tar.gz", hash = "sha256:4b184a7db893f2100bbd831991ae54ca89167a2b9ce68faea71eaa9e37716aed"},
-    {file = "sphinx_autobuild-2020.9.1-py3-none-any.whl", hash = "sha256:df5c72cb8b8fc9b31279c4619780c4e95029be6de569ff60a8bb2e99d20f63dd"},
+    {file = "sphinx-autobuild-2021.3.14.tar.gz", hash = "sha256:de1ca3b66e271d2b5b5140c35034c89e47f263f2cd5db302c9217065f7443f05"},
+    {file = "sphinx_autobuild-2021.3.14-py3-none-any.whl", hash = "sha256:8fe8cbfdb75db04475232f05187c776f46f6e9e04cacf1e49ce81bdac649ccac"},
 ]
 
 [package.dependencies]
+colorama = "*"
 livereload = "*"
 sphinx = "*"
 
@@ -1154,4 +1155,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.7"
-content-hash = "0d702f44878ef0b158baf90acb839b45b12a44e7c3fe48bce2c7772a404da425"
+content-hash = "e90e3e6a12640132136b3efd3679f4c536ffcaa3a6236a8234f63c654ba9fce7"

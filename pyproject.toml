@@ -57,7 +57,7 @@ sphinxcontrib-httpdomain = "^1.8.1"
 optional = true
 
 [tool.poetry.group.docs-dev.dependencies]
-sphinx-autobuild = "^2020.9.1"
+sphinx-autobuild = ">=2020.9.1,<2022.0.0"
 
 [build-system]
 requires = ["poetry-core"]
