@@ -35,28 +35,28 @@ optional = true
 
 [tool.poetry.group.ci.dependencies]
 # Required for example project's tests to pass
-coreapi = "2.3.3"
+coreapi = "~=2.3"
 
 [tool.poetry.group.dev.dependencies]
-factory_boy = "3.2.1"
-pytest = "7.3.1"
-pytest-django = "4.5.2"
-pytest-cov = "4.0.0"
+factory_boy = "~=3.2"
+pytest = "~=7.4"
+pytest-django = "~=4.5"
+pytest-cov = "~=4.1"
 
 [tool.poetry.group.docs]
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-myst-parser = "^1.0.0"
-sphinx = "^5"
-sphinx-rtd-theme = "^1.2.0"
-sphinxcontrib-httpdomain = "^1.8.1"
+myst-parser = "~=1.0"
+sphinx = "~=5.0"
+sphinx-rtd-theme = "~=2.0"
+sphinxcontrib-httpdomain = "~=1.8"
 
 [tool.poetry.group.docs-dev]
 optional = true
 
 [tool.poetry.group.docs-dev.dependencies]
-sphinx-autobuild = "^2020.9.1"
+sphinx-autobuild = "~=2021.3"
 
 [build-system]
 requires = ["poetry-core"]
