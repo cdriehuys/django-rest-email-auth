@@ -18,3 +18,4 @@ jobs:
           changelog-path: docs/CHANGELOG.md
           release-type: python
           package-name: django-rest-email-auth
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
