@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.1](https://github.com/cdriehuys/django-rest-email-auth/compare/v4.0.0...v4.0.1) (2024-06-19)
+
+
+### Bug Fixes
+
+* Specify field type for ID columns ([075675e](https://github.com/cdriehuys/django-rest-email-auth/commit/075675edb611f3b5282d2dfaa4f51411fcdbe4ec))
+
 ## [4.0.0](https://github.com/cdriehuys/django-rest-email-auth/compare/v3.0.3...v4.0.0) (2023-03-25)
 
 
