@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.2](https://github.com/cdriehuys/django-rest-email-auth/compare/v4.0.1...v4.0.2) (2024-06-19)
+
+
+### Bug Fixes
+
+* Workflow for publishing versions ([c4aae4c](https://github.com/cdriehuys/django-rest-email-auth/commit/c4aae4c77ee5af4d47211d4ee820aeff830f2d41))
+
 ## [4.0.1](https://github.com/cdriehuys/django-rest-email-auth/compare/v4.0.0...v4.0.1) (2024-06-19)
 
 
