@@ -17,7 +17,7 @@ exclude = '''
 
 [tool.poetry]
 name = "django-rest-email-auth"
-version = "4.0.2"
+version = "4.0.3"
 description = "Django app for email based authentication and registration via a REST API."
 authors = ["Chathan Driehuys <chathan@driehuys.com>"]
 license = "MIT"
