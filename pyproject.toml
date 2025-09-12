@@ -25,10 +25,10 @@ readme = "README.rst"
 packages = [{include = "rest_email_auth"}]
 
 [tool.poetry.dependencies]
-python = "^3.7"
-Django = ">=3.2, <5"
+python = "^3.9"
+Django = ">=4.2, <6"
 django-email-utils = "^1"
-djangorestframework = "^3.10"
+djangorestframework = "^3.16"
 
 [tool.poetry.group.ci]
 optional = true
@@ -38,7 +38,7 @@ optional = true
 coreapi = "~=2.3"
 
 [tool.poetry.group.dev.dependencies]
-factory_boy = "~=3.2"
+factory_boy = "~=3.3"
 pytest = "~=7.4"
 pytest-django = "~=4.5"
 pytest-cov = "~=4.1"

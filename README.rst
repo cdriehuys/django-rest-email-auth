@@ -38,9 +38,9 @@ Features:
 Compatibility
 *************
 
-| **Python:** 3.6 or later
-| **Django:** Versions 3.2 through 4.1
-| **Django REST Framework:** 3.14 or later
+| **Python:** 3.9 or later
+| **Django:** Versions 4.2 through 5.2
+| **Django REST Framework:** 3.16 or later
 
 ***************
 Adding Features

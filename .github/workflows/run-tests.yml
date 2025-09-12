@@ -11,38 +11,32 @@ jobs:
   test:
     name: Test
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         include:
-          # Django 3.2
-          - django-version: '>= 3.2, < 3.3'
-            python-version: "3.7"
-          - django-version: '>= 3.2, < 3.3'
-            python-version: "3.8"
-          - django-version: '>= 3.2, < 3.3'
-            python-version: "3.9"
-          - django-version: '>= 3.2, < 3.3'
+          # Django 4.0 - 4.1
+          - django-version: '>= 4.0, <= 4.2'
             python-version: "3.10"
 
-          # Django 4.0 - 4.1
-          - django-version: '>= 4.0, < 4.2'
-            python-version: "3.8"
-          - django-version: '>= 4.0, < 4.2'
-            python-version: "3.9"
-          - django-version: '>= 4.0, < 4.2'
+          # Django 5.0 - 5.2
+          - django-version: '>= 5.0, <= 5.2'
             python-version: "3.10"
+          - django-version: '>= 5.0, <= 5.2'
+            python-version: "3.11"
+          - django-version: '>= 5.0, <= 5.2'
+            python-version: "3.12"
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
 
       - name: Install poetry
-        uses: abatilo/actions-poetry@v3
+        uses: abatilo/actions-poetry@v4
 
       - name: Install dependencies
         run: |
@@ -55,6 +49,6 @@ jobs:
           poetry run pytest --cov=rest_email_auth --cov-report=xml
 
       - name: Upload coverage report
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
