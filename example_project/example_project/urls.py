@@ -19,9 +19,10 @@ from django.contrib import admin
 
 from rest_framework.documentation import include_docs_urls
 from rest_framework.renderers import DocumentationRenderer
+from rest_framework.schemas import openapi
 
 urlpatterns = [
     path(r"account/", include("rest_email_auth.urls")),
     path(r"admin/", admin.site.urls),
-    path(r"docs/", include_docs_urls(title="Example Project", renderer_classes=DocumentationRenderer)),
+    path(r"docs/", include_docs_urls(title="Example Project", renderer_classes=[DocumentationRenderer], generator_class=openapi.SchemaGenerator)),
 ]
