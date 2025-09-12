@@ -39,7 +39,7 @@ Compatibility
 *************
 
 | **Python:** 3.6 or later
-| **Django:** Versions 3.2 through 4.1
+| **Django:** Versions 3.2 through 5.2
 | **Django REST Framework:** 3.14 or later
 
 ***************

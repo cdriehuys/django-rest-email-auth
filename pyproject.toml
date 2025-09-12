@@ -26,9 +26,9 @@ packages = [{include = "rest_email_auth"}]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-Django = ">=3.2, <5"
+Django = ">=3.2"
 django-email-utils = "^1"
-djangorestframework = "^3.10"
+djangorestframework = "^3.16"
 
 [tool.poetry.group.ci]
 optional = true
