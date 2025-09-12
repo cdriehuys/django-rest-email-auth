@@ -25,7 +25,7 @@ readme = "README.rst"
 packages = [{include = "rest_email_auth"}]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.9"
 Django = ">=3.2"
 django-email-utils = "^1"
 djangorestframework = "^3.16"
