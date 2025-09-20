@@ -1,5 +1,4 @@
-"""Fixtures used to test the ``rest_email_auth`` app.
-"""
+"""Fixtures used to test the ``rest_email_auth`` app."""
 
 import copy
 import logging

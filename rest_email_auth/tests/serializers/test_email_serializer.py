@@ -96,7 +96,7 @@ def test_serialize(email_factory):
     expected = {
         "id": email.id,
         # DRF truncates last bytes and adds a Z for UTC timestamps
-        "created_at": email.created_at.isoformat()[:-6] + 'Z',
+        "created_at": email.created_at.isoformat()[:-6] + "Z",
         "email": email.email,
         "is_primary": email.is_primary,
         "is_verified": email.is_verified,
