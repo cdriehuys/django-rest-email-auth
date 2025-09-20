@@ -18,7 +18,20 @@ jobs:
 
       - uses: webiny/action-conventional-commits@v1.3.0
 
-      - uses: psf/black@stable
+      # Use the minimum supported version for linting
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.9"
+
+      - name: Install poetry
+        uses: abatilo/actions-poetry@v4
+
+      - name: Install dependencies
+        run: poetry install --with ci
+
+      - name: Check formatting with black
+        run: poetry run black --check .
 
       - name: flake8 Lint
-        uses: py-actions/flake8@v2
+        run: poetry run flake8 ./example_project ./rest_email_auth ./*.py

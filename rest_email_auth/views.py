@@ -1,5 +1,4 @@
-"""Views for the ``rest_email_auth`` app.
-"""
+"""Views for the ``rest_email_auth`` app."""
 
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
