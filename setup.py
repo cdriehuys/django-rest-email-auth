@@ -21,26 +21,27 @@ setup(
         "Development Status :: 5 - Production/Stable",
         # Supported versions of Django
         "Framework :: Django",
-        "Framework :: Django :: 3.2",
-        "Framework :: Django :: 4.0",
-        "Framework :: Django :: 4.1",
+        "Framework :: Django :: 4.2",
+        "Framework :: Django :: 5.2",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
         # Supported versions of Python
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
     ],
     # Include the actual source code
     include_package_data=True,
     packages=find_packages(),
     # Dependencies
     install_requires=[
-        "Django >= 3.2, <= 4.2",
+        "Django >= 4.2, <= 5.2",
         "django-email-utils >= 1.0, < 2.0",
         # DRF 3.10 is the first to support our minimum Django version of 2.2.
-        "djangorestframework >= 3.14",
+        "djangorestframework >= 3.16",
     ],
 )
