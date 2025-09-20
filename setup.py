@@ -9,7 +9,7 @@ def get_description():
 setup(
     # Package meta-data
     name="django-rest-email-auth",
-    version="4.0.3",
+    version="5.0.0",
     description="Django app for email based authentication and registration.",
     long_description=get_description(),
     author="Chathan Driehuys",

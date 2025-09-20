@@ -1,5 +1,21 @@
 # Changelog
 
+## [5.0.0](https://github.com/cdriehuys/django-rest-email-auth/compare/v4.0.3...v5.0.0) (2025-09-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop support for Python versions less than 3.9 and Django versions less  than 4.2
+
+### Features
+
+* add support for Django 5.2 ([#148](https://github.com/cdriehuys/django-rest-email-auth/issues/148)) ([5f1489b](https://github.com/cdriehuys/django-rest-email-auth/commit/5f1489b39a61ce4320f9ac6dcf821d0b48070e46))
+
+
+### Documentation
+
+* update contributing documentation ([#152](https://github.com/cdriehuys/django-rest-email-auth/issues/152)) ([8ec4607](https://github.com/cdriehuys/django-rest-email-auth/commit/8ec4607cddfc66e3a3956f06d8437c94c29b826e))
+
 ## [4.0.3](https://github.com/cdriehuys/django-rest-email-auth/compare/v4.0.2...v4.0.3) (2024-06-19)
 
 
