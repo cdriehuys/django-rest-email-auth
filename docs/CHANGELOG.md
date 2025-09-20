@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.0.1](https://github.com/cdriehuys/django-rest-email-auth/compare/v5.0.0...v5.0.1) (2025-09-20)
+
+
+### Documentation
+
+* fix readthedocs build ([#154](https://github.com/cdriehuys/django-rest-email-auth/issues/154)) ([5715e54](https://github.com/cdriehuys/django-rest-email-auth/commit/5715e549777d6dd83c25f5b7837b435883c787ad))
+
 ## [5.0.0](https://github.com/cdriehuys/django-rest-email-auth/compare/v4.0.3...v5.0.0) (2025-09-20)
 
 
