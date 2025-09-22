@@ -29,7 +29,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install poetry
-        uses: abatilo/actions-poetry@v3
+        uses: abatilo/actions-poetry@v4
 
       - name: Publish package
         run: poetry publish --build
